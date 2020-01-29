@@ -1527,9 +1527,8 @@ div.ac > ul > li:before,
   background-color: #fff;
   margin: 0;
   padding: 0;
-}
-.post .pjax article table tr:nth-child(2n) {
-  background-color: #f8f8f8;
+/*&:nth-child(2n)
+            background-color #f8f8f8*/
 }
 .post .pjax article table tr th {
   font-weight: bold;
@@ -1553,9 +1552,6 @@ div.ac > ul > li:before,
 .post .pjax article table tr td:last-child {
   margin-top: 0;
   margin-bottom: 0;
-}
-.post .pjax article table.green tr:nth-child(2n) {
-  background-color: #e3f1ea;
 }
 .post .pjax article table.green tr th {
   color: #fff;
