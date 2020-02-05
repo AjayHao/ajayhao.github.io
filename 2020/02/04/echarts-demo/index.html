@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>常用金融指标 | Ajay&#39;s Blog</title>
-  <meta name="keywords" content="  ">
-  <meta name="description" content="常用金融指标 | Ajay&#39;s Blog">
+  <title>Echarts图表 | Ajay&#39;s Blog</title>
+  <meta name="keywords" content=" echarts , 可视化 ">
+  <meta name="description" content="Echarts图表 | Ajay&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="IT科班出身，金融行业码农，由于工作之后技能点乱点，因而无稳定技术流派，已义无反顾投身开源世界 Java爱好者，近期又迷上了Python， 内心深处拒绝“成为码农”却又常常研究代码到深夜 讨厌无趣的人，更害怕自己变成一个那样的人。。 万幸已脱单。。难为妹子了orz So..Don’t Have to Try So Hard..Just relax , and share , and have FU">
 <meta property="og:type" content="website">
@@ -386,30 +386,38 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="page-" class="article article-type-page" itemscope itemprop="blogPost">
+        <article id="post-echarts-demo" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">常用金融指标</h1>
+        <h1 class="article-title">Echarts图表</h1>
     
     <div class="article-meta">
         
         
         
+        <span class="book">
+            
+                <a  data-rel="技术">技术</a>
+            
+        </span>
+        
         
         <span class="tag">
             
-            <a class="color3"></a>
+            <a class="color2">echarts</a>
+            
+            <a class="color2">可视化</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-01-20 23:09:00'>2020-01-20 23:09</time>
+        创建时间:<time class="date" title='更新时间: 2020-02-04 22:14:00'>2020-02-04 22:14</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:629</span>
+        <span>字数:1.2k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -428,7 +436,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-CPI"><span class="toc-text">1.CPI</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-定义"><span class="toc-text">1.1 定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-作用"><span class="toc-text">1.2 作用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-PPI"><span class="toc-text">2.PPI</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-定义"><span class="toc-text">2.1 定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-作用"><span class="toc-text">2.2 作用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-PMI"><span class="toc-text">3.PMI</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-定义"><span class="toc-text">3.1 定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-分类"><span class="toc-text">3.2 分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-作用"><span class="toc-text">3.3 作用</span></a></li></ol></li></ol>
+        
     
 <style>
     .left-col .switch-btn,
@@ -444,39 +452,425 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><div class='inner-toc'><h2>目录</h2><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-CPI"><span class="toc-text">1.CPI</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-定义"><span class="toc-text">1.1 定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-作用"><span class="toc-text">1.2 作用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-PPI"><span class="toc-text">2.PPI</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-定义"><span class="toc-text">2.1 定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-作用"><span class="toc-text">2.2 作用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-PMI"><span class="toc-text">3.PMI</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-定义"><span class="toc-text">3.1 定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-分类"><span class="toc-text">3.2 分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-作用"><span class="toc-text">3.3 作用</span></a></li></ol></li></ol></div></p>
-<h2 id="1-CPI"><a href="#1-CPI" class="headerlink" title="1.CPI"></a>1.CPI</h2><h3 id="1-1-定义"><a href="#1-1-定义" class="headerlink" title="1.1 定义"></a>1.1 定义</h3><blockquote>
-<p>即居民消费价格指数(Consumer Price Index)，是度量一组代表性消费商品和服务价格水平随时间而变化的指标，是观察通货膨胀水平的重要指标。</p>
-</blockquote>
-<h3 id="1-2-作用"><a href="#1-2-作用" class="headerlink" title="1.2 作用"></a>1.2 作用</h3><ul>
-<li><strong>反映通货膨胀水平</strong> 通货膨胀的严重程度是用通货膨胀率来反映的，它说明了一定时期内商品价格持续上升的幅度。通货膨胀率一般以CPI来表示。</li>
-<li><strong>反映货币购买力变动</strong> 货币购买力是指单位货币能够购买到的消费品和服务的数量。CPI上涨，货币购买力则下降；反之则上升。CPI的倒数就是货币购买力指数。</li>
-<li><strong>反映对职工实际工资的影响</strong> CPI提高意味着实际工资的减少,CPI的下降意味着实际工资的提高。因此实际工资等于名义工资除以CPI。</li>
-</ul>
-<h2 id="2-PPI"><a href="#2-PPI" class="headerlink" title="2.PPI"></a>2.PPI</h2><h3 id="2-1-定义"><a href="#2-1-定义" class="headerlink" title="2.1 定义"></a>2.1 定义</h3><blockquote>
-<p>即生产者价格指数(Producer Price Index)，主要衡量企业购买的一篮子物品的总费用，观察工业企业产品出厂价格变动趋势和变动的程度，是反映某一个时期生产领域价格变动情况的重要经济指标，也是制定有关经济政策和国民经济核算的重要依据。</p>
-</blockquote>
-<h3 id="2-2-作用"><a href="#2-2-作用" class="headerlink" title="2.2 作用"></a>2.2 作用</h3><ul>
-<li>PPI变动往往是CPI变动的前奏，所以PPI为先行指标。</li>
-<li>PPI指数能通过反映生产者获得原材料的价格波动情况，推算预期CPI，从而估计通货膨胀的风险。</li>
-<li>如果PPI指数下降，通过产业链向下游传导影响消费品，导致整体物价水平的下降，就要警惕通货紧缩的风险。</li>
-</ul>
-<h2 id="3-PMI"><a href="#3-PMI" class="headerlink" title="3.PMI"></a>3.PMI</h2><h3 id="3-1-定义"><a href="#3-1-定义" class="headerlink" title="3.1 定义"></a>3.1 定义</h3><blockquote>
-<p>即采购经理指数(Purchasing Managers’Index)。PMI涵盖着生产与流通、制造业与非制造业等领域，分为制造业PMI、服务业PMI，也有一些国家建立了建筑业PMI。</p>
-</blockquote>
-<h3 id="3-2-分类"><a href="#3-2-分类" class="headerlink" title="3.2 分类"></a>3.2 分类</h3><ul>
-<li>中国制造业采购经理指数体系共包括11个指数：<strong>新订单、生产、就业、供应商配送、存货、新出口订单、采购、产成品库存、购进价格、进口、积压订单。</strong></li>
-</ul>
-<h3 id="3-3-作用"><a href="#3-3-作用" class="headerlink" title="3.3 作用"></a>3.3 作用</h3><ul>
-<li>PMI通常以50％作为经济强弱的分界点。当指数高于50％时，被解释为经济扩张的信号；当指数低于50％，尤其是非常接近40％时，则有经济萧条的可能。</li>
-</ul>
+        <p>&emsp;&emsp;最近开始研究数据分析和数据挖掘，两方面的基本功要夯实，一块是数据建模，另一块是可视化。 现有的可视化工具已经非常丰富，图表构成也非常齐全，很多也支持个性化。 具体的可视化工具比较可参考：<a href="https://www.zhihu.com/question/19929609" target="_blank" rel="noopener">有哪些值得推荐的数据可视化工具？</a></p>
+<p>&emsp;&emsp;其实看了知乎各路大神的推荐，心中多少已经有底了。。真正的重剑无锋大巧不工，最值得学的还是Excel啊！跑题了。。本次还是专心研究Echarts吧。。</p>
+<div id="echarts998" style="width: 90%;height: 500px;margin: 0 auto"></div>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('echarts998'));
 
+        // 指定图表的配置项和数据
+        var option = {
+    title: {
+        text: '折线图堆叠'
+    },
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend: {
+        data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎']
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [
+        {
+            name: '邮件营销',
+            type: 'line',
+            stack: '总量',
+            data: [120, 132, 101, 134, 90, 230, 210]
+        },
+        {
+            name: '联盟广告',
+            type: 'line',
+            stack: '总量',
+            data: [220, 182, 191, 234, 290, 330, 310]
+        },
+        {
+            name: '视频广告',
+            type: 'line',
+            stack: '总量',
+            data: [150, 232, 201, 154, 190, 330, 410]
+        },
+        {
+            name: '直接访问',
+            type: 'line',
+            stack: '总量',
+            data: [320, 332, 301, 334, 390, 330, 320]
+        },
+        {
+            name: '搜索引擎',
+            type: 'line',
+            stack: '总量',
+            data: [820, 932, 901, 934, 1290, 1330, 1320]
+        }
+    ]
+};
+
+
+        // 使用刚指定的配置项和数据显示图表
+        myChart.setOption(option);
+</script>
+
+<hr>
+<div id="echarts8278" style="width: 90%;height: 500px;margin: 0 auto"></div>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('echarts8278'));
+
+        // 指定图表的配置项和数据
+        var option = {
+    title: {
+        text: '未来一周气温变化',
+        subtext: '纯属虚构'
+    },
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend: {
+        data: ['最高气温', '最低气温']
+    },
+    toolbox: {
+        show: true,
+        feature: {
+            dataZoom: {
+                yAxisIndex: 'none'
+            },
+            dataView: {readOnly: false},
+            magicType: {type: ['line', 'bar']},
+            restore: {},
+            saveAsImage: {}
+        }
+    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+    },
+    yAxis: {
+        type: 'value',
+        axisLabel: {
+            formatter: '{value} °C'
+        }
+    },
+    series: [
+        {
+            name: '最高气温',
+            type: 'line',
+            data: [11, 11, 15, 13, 12, 13, 10],
+            markPoint: {
+                data: [
+                    {type: 'max', name: '最大值'},
+                    {type: 'min', name: '最小值'}
+                ]
+            },
+            markLine: {
+                data: [
+                    {type: 'average', name: '平均值'}
+                ]
+            }
+        },
+        {
+            name: '最低气温',
+            type: 'line',
+            data: [1, -2, 2, 5, 3, 2, 0],
+            markPoint: {
+                data: [
+                    {name: '周最低', value: -2, xAxis: 1, yAxis: -1.5}
+                ]
+            },
+            markLine: {
+                data: [
+                    {type: 'average', name: '平均值'},
+                    [{
+                        symbol: 'none',
+                        x: '90%',
+                        yAxis: 'max'
+                    }, {
+                        symbol: 'circle',
+                        label: {
+                            position: 'start',
+                            formatter: '最大值'
+                        },
+                        type: 'max',
+                        name: '最高点'
+                    }]
+                ]
+            }
+        }
+    ]
+};
+
+        // 使用刚指定的配置项和数据显示图表
+        myChart.setOption(option);
+</script>
+
+<hr>
+<div id="echarts1486" style="width: 90%;height: 500px;margin: 0 auto"></div>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('echarts1486'));
+
+        // 指定图表的配置项和数据
+        var option = {
+    title: {
+        text: '共享数据集'
+    },
+    legend: {},
+    tooltip: {
+        trigger: 'axis',
+        showContent: false
+    },
+    dataset: {
+        source: [
+            ['product', '2012', '2013', '2014', '2015', '2016', '2017'],
+            ['Matcha Latte', 41.1, 30.4, 65.1, 53.3, 83.8, 98.7],
+            ['Milk Tea', 86.5, 92.1, 85.7, 83.1, 73.4, 55.1],
+            ['Cheese Cocoa', 24.1, 67.2, 79.5, 86.4, 65.2, 82.5],
+            ['Walnut Brownie', 55.2, 67.1, 69.2, 72.4, 53.9, 39.1]
+        ]
+    },
+    xAxis: {type: 'category'},
+    yAxis: {gridIndex: 0},
+    grid: {top: '55%'},
+    series: [
+        {type: 'line', smooth: true, seriesLayoutBy: 'row'},
+        {type: 'line', smooth: true, seriesLayoutBy: 'row'},
+        {type: 'line', smooth: true, seriesLayoutBy: 'row'},
+        {type: 'line', smooth: true, seriesLayoutBy: 'row'},
+        {
+            type: 'pie',
+            id: 'pie',
+            radius: '30%',
+            center: ['50%', '25%'],
+            label: {
+                formatter: '{b}: {@2012} ({d}%)'
+            },
+            encode: {
+                itemName: 'product',
+                value: '2012',
+                tooltip: '2012'
+            }
+        }
+    ]
+}
+
+        // 使用刚指定的配置项和数据显示图表
+        myChart.setOption(option);
+</script>
+<hr>
+<div id="echarts6503" style="width: 90%;height: 500px;margin: 0 auto"></div>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('echarts6503'));
+
+        // 指定图表的配置项和数据
+        var option = 
+{    
+    title: {
+         text: '正负条形图'
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        }
+    },
+    legend: {
+        data: ['利润', '支出', '收入']
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis: [
+        {
+            type: 'value'
+        }
+    ],
+    yAxis: [
+        {
+            type: 'category',
+            axisTick: {
+                show: false
+            },
+            data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+        }
+    ],
+    series: [
+        {
+            name: '利润',
+            type: 'bar',
+            label: {
+                show: true,
+                position: 'inside'
+            },
+            data: [200, 170, 240, 244, 200, 220, 210]
+        },
+        {
+            name: '收入',
+            type: 'bar',
+            stack: '总量',
+            label: {
+                show: true
+            },
+            data: [320, 302, 341, 374, 390, 450, 420]
+        },
+        {
+            name: '支出',
+            type: 'bar',
+            stack: '总量',
+            label: {
+                show: true,
+                position: 'left'
+            },
+            data: [-120, -132, -101, -134, -190, -230, -210]
+        }
+    ]
+};
+
+        // 使用刚指定的配置项和数据显示图表
+        myChart.setOption(option);
+</script>
+<hr>
+<div id="echarts6057" style="width: 90%;height: 500px;margin: 0 auto"></div>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('echarts6057'));
+
+        // 指定图表的配置项和数据
+        var option = option = {
+    title: {
+        text: '嵌套饼图'
+    },
+    tooltip: {
+        trigger: 'item',
+        formatter: '{a} <br/>{b}: {c} ({d}%)'
+    },
+    legend: {
+        orient: 'vertical',
+        top: 30,
+        left: 5,
+        data: ['直达', '营销广告', '搜索引擎', '邮件营销', '联盟广告', '视频广告', '百度', '谷歌', '必应', '其他']
+    },
+    series: [
+        {
+            name: '访问来源',
+            type: 'pie',
+            selectedMode: 'single',
+            radius: [0, '30%'],
+            label: {
+                position: 'inner'
+            },
+            labelLine: {
+                show: false
+            },
+            data: [
+                {value: 335, name: '直达', selected: true},
+                {value: 679, name: '营销广告'},
+                {value: 1548, name: '搜索引擎'}
+            ]
+        },
+        {
+            name: '访问来源',
+            type: 'pie',
+            radius: ['40%', '55%'],
+            label: {
+                formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}:}{c}  {per|{d}%}  ',
+                backgroundColor: '#eee',
+                borderColor: '#aaa',
+                borderWidth: 1,
+                borderRadius: 4,
+                // shadowBlur:3,
+                // shadowOffsetX: 2,
+                // shadowOffsetY: 2,
+                // shadowColor: '#999',
+                // padding: [0, 7],
+                rich: {
+                    a: {
+                        color: '#999',
+                        lineHeight: 22,
+                        align: 'center'
+                    },
+                    // abg: {
+                    //     backgroundColor: '#333',
+                    //     width: '100%',
+                    //     align: 'right',
+                    //     height: 22,
+                    //     borderRadius: [4, 4, 0, 0]
+                    // },
+                    hr: {
+                        borderColor: '#aaa',
+                        width: '100%',
+                        borderWidth: 0.5,
+                        height: 0
+                    },
+                    b: {
+                        fontSize: 16,
+                        lineHeight: 33
+                    },
+                    per: {
+                        color: '#eee',
+                        backgroundColor: '#334455',
+                        padding: [2, 4],
+                        borderRadius: 2
+                    }
+                }
+            },
+            data: [
+                {value: 335, name: '直达'},
+                {value: 310, name: '邮件营销'},
+                {value: 234, name: '联盟广告'},
+                {value: 135, name: '视频广告'},
+                {value: 1048, name: '百度'},
+                {value: 251, name: '谷歌'},
+                {value: 147, name: '必应'},
+                {value: 102, name: '其他'}
+            ]
+        }
+    ]
+};
+
+
+        // 使用刚指定的配置项和数据显示图表
+        myChart.setOption(option);
+</script>
       
        
     </div>
 </article>
 
 
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>Echarts图表</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.2k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Hao Zhenjie">Hao Zhenjie</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-02-04, 22:14:00</p>
+    <p><span class="copy-title">最后更新:</span>2020-02-04, 22:14:00</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/02/04/echarts-demo/" title="Echarts图表">http://ajayhao.github.io/2020/02/04/echarts-demo/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
 
 
 
