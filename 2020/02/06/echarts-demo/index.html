@@ -157,7 +157,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="14">
-<input type="hidden" id="yelog_site_word_count" value="56k">
+<input type="hidden" id="yelog_site_word_count" value="56.6k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -417,7 +417,7 @@
     </div>
     <div class="article-meta">
         
-        <span>字数:1.2k</span>
+        <span>字数:1.8k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -436,7 +436,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一-组件（component）"><span class="toc-text">一. 组件（component）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-组件构成"><span class="toc-text">1. 组件构成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-组件定位"><span class="toc-text">2. 组件定位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-行列映射"><span class="toc-text">3. 行列映射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他详细教程参考："><span class="toc-text">其他详细教程参考：</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -453,11 +453,78 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>&emsp;&emsp;最近开始研究数据分析和数据挖掘，两方面的基本功要夯实，一块是数据建模，另一块是可视化。 现有的可视化工具已经非常丰富，图表构成也非常齐全，很多也支持个性化。 具体的可视化工具比较可参考：<a href="https://www.zhihu.com/question/19929609" target="_blank" rel="noopener">有哪些值得推荐的数据可视化工具？</a></p>
-<p>&emsp;&emsp;其实看了知乎各路大神的推荐，心中多少已经有底了。。真正的重剑无锋大巧不工，最值得学的还是Excel啊！跑题了。。本次还是专心研究Echarts吧。。</p>
-<div id="echarts1772" style="width: 90%;height: 500px;margin: 0 auto"></div>
+<p>&emsp;&emsp;其实看了知乎各路大神的推荐，心中多少已经有底了。。真正的重剑无锋大巧不工，最值得学的还是Excel啊！</p>
+<p>&emsp;&emsp;Echarts加入到apache基金会后，文档方面完善了很多，不但有了更规范的API和教程，也有了每种图表分门别类的数据速查手册，对于快速上手和开发益处多多。</p>
+<h2 id="一-组件（component）"><a href="#一-组件（component）" class="headerlink" title="一. 组件（component）"></a>一. 组件（component）</h2><h3 id="1-组件构成"><a href="#1-组件构成" class="headerlink" title="1. 组件构成"></a>1. 组件构成</h3><p>&emsp;&emsp;组件是构成图表的要素，常用的组件有xAxis（直角坐标系 X 轴）、yAxis（直角坐标系 Y 轴）、grid（直角坐标系底板）、angleAxis（极坐标系角度轴）、radiusAxis（极坐标系半径轴）、polar（极坐标系底板）、geo（地理坐标系）、dataZoom（数据区缩放组件）、visualMap（视觉映射组件）、tooltip（提示框组件）、toolbox（工具栏组件）、series（系列）等。</p>
+<p><img src="https://s2.ax1x.com/2020/02/14/1v89js.jpg" alt="组件"></p>
+<p>&emsp;&emsp;其中系列是比较特殊的组件，是图表的核心数据展现区域，一个系列中可以包含一到多个图表类型，可进行自定义排布与叠加。分单序列数据与数据集方式。</p>
+<p><img src="https://s2.ax1x.com/2020/02/14/1vGKJS.jpg" alt="series-data方式"></p>
+<p><img src="https://s2.ax1x.com/2020/02/14/1vGdWF.jpg" alt="series-dataset方式"></p>
+<h3 id="2-组件定位"><a href="#2-组件定位" class="headerlink" title="2. 组件定位"></a>2. 组件定位</h3><p>&emsp;&emsp;通过grid的位置属性来精确定位图表所在位置<br><img src="https://s2.ax1x.com/2020/02/14/1vJwAP.jpg" alt="定位"></p>
+<p>&emsp;&emsp;多个grid<br><img src="https://s2.ax1x.com/2020/02/15/1vJv4K.jpg" alt="grid阵列"></p>
+<h3 id="3-行列映射"><a href="#3-行列映射" class="headerlink" title="3. 行列映射"></a>3. 行列映射</h3><p>&emsp;&emsp;使用seriesLayoutBy配置项，改变图表对于行列的理解。 seriesLayoutBy可取值：</p>
+<ul>
+<li>‘column’: 默认值。系列被安放到 dataset 的列上面。</li>
+<li>‘row’: 系列被安放到 dataset 的行上面。</li>
+</ul>
+<div id="echarts6121" style="width: 90%;height: 500px;margin: 0 auto"></div>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts1772'));
+        var myChart = echarts.init(document.getElementById('echarts6121'));
+
+        // 指定图表的配置项和数据
+        var option = {
+    title: {
+        text: '行列映射'
+    },
+    legend: {
+        left: 100
+    },
+    tooltip: {},
+    dataset: {
+        source: [
+            ['product', '2012', '2013', '2014', '2015'],
+            ['Matcha Latte', 41.1, 30.4, 65.1, 53.3],
+            ['Milk Tea', 86.5, 92.1, 85.7, 83.1],
+            ['Cheese Cocoa', 24.1, 67.2, 79.5, 86.4]
+        ]
+    },
+    xAxis: [
+        {type: 'category', gridIndex: 0},
+        {type: 'category', gridIndex: 1}
+    ],
+    yAxis: [
+        {gridIndex: 0},
+        {gridIndex: 1}
+    ],
+    grid: [
+        {bottom: '55%'},
+        {top: '55%'}
+    ],
+    series: [
+        // 这几个系列会在第一个直角坐标系中，每个系列对应到 dataset 的每一行。
+        {type: 'bar', seriesLayoutBy: 'row'},
+        {type: 'bar', seriesLayoutBy: 'row'},
+        {type: 'bar', seriesLayoutBy: 'row'},
+        // 这几个系列会在第二个直角坐标系中，每个系列对应到 dataset 的每一列。
+        {type: 'bar', xAxisIndex: 1, yAxisIndex: 1},
+        {type: 'bar', xAxisIndex: 1, yAxisIndex: 1},
+        {type: 'bar', xAxisIndex: 1, yAxisIndex: 1},
+        {type: 'bar', xAxisIndex: 1, yAxisIndex: 1}
+    ]
+};
+
+
+        // 使用刚指定的配置项和数据显示图表
+        myChart.setOption(option);
+</script>
+
+<h3 id="其他详细教程参考："><a href="#其他详细教程参考：" class="headerlink" title="其他详细教程参考："></a>其他详细教程参考：</h3><p>&emsp;&emsp;下面给出一些基本的图例，具体可参考<a href="https://www.echartsjs.com/zh/tutorial.html" target="_blank" rel="noopener">Echarts官方教程</a></p>
+<hr>
+<div id="echarts4490" style="width: 90%;height: 500px;margin: 0 auto"></div>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('echarts4490'));
 
         // 指定图表的配置项和数据
         var option = {
@@ -529,10 +596,10 @@
 </script>
 
 <hr>
-<div id="echarts7839" style="width: 90%;height: 500px;margin: 0 auto"></div>
+<div id="echarts4520" style="width: 90%;height: 500px;margin: 0 auto"></div>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts7839'));
+        var myChart = echarts.init(document.getElementById('echarts4520'));
 
         // 指定图表的配置项和数据
         var option = {
@@ -622,10 +689,10 @@
 </script>
 
 <hr>
-<div id="echarts9087" style="width: 90%;height: 500px;margin: 0 auto"></div>
+<div id="echarts4529" style="width: 90%;height: 500px;margin: 0 auto"></div>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts9087'));
+        var myChart = echarts.init(document.getElementById('echarts4529'));
 
         // 指定图表的配置项和数据
         var option = {
@@ -675,10 +742,10 @@
         myChart.setOption(option);
 </script>
 <hr>
-<div id="echarts8251" style="width: 90%;height: 500px;margin: 0 auto"></div>
+<div id="echarts2609" style="width: 90%;height: 500px;margin: 0 auto"></div>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts8251'));
+        var myChart = echarts.init(document.getElementById('echarts2609'));
 
         // 指定图表的配置项和数据
         var option = 
@@ -751,10 +818,10 @@
         myChart.setOption(option);
 </script>
 <hr>
-<div id="echarts338" style="width: 90%;height: 500px;margin: 0 auto"></div>
+<div id="echarts2287" style="width: 90%;height: 500px;margin: 0 auto"></div>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts338'));
+        var myChart = echarts.init(document.getElementById('echarts2287'));
 
         // 指定图表的配置项和数据
         var option = option = {
@@ -862,7 +929,7 @@
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>数据分析可视化工具之 - Echarts</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">1.2k</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.8k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Hao Zhenjie">Hao Zhenjie</a></p>
     <p><span class="copy-title">发布时间:</span>2020-02-06, 22:14:00</p>
     <p><span class="copy-title">最后更新:</span>2020-02-06, 22:14:00</p>
