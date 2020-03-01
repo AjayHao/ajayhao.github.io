@@ -549,8 +549,11 @@ localDate.minusDays(1);       // 减1天：2020-02-22
 localDate.minusWeeks(1);      // 减1周：2020-02-16
 localDate.minusMonths(1);     // 减1月：2020-01-23
 localDate.minusYears(1);      // 减1年：2019-02-23</code></pre><p>&emsp;&emsp;加法方法传入负数可同样实现减法效果 </p>
-<h3 id="普通日期转换"><a href="#普通日期转换" class="headerlink" title="普通日期转换"></a>普通日期转换</h3><p>&emsp;&emsp;这边的转换指时间日期按照规则计算并返回，并不影响调用对象localDate的原始值<br>    LocalDate localDate = LocalDate.of(2020, 2, 23);<br>    localDate.withDayOfMonth(1));  // 转为该月的第1天： 2020-02-01<br>    localDate.withDayOfYear(1));   // 转为该年的第1天： 2020-01-01<br>    localDate.withMonth(1));       // 替换月份为1：2020-01-23<br>    localDate.withYear(2019));     // 替换年份为2019：2019-02-23</p>
-<h3 id="高级日期转换"><a href="#高级日期转换" class="headerlink" title="高级日期转换"></a>高级日期转换</h3><p>&emsp;&emsp;高级日期替换需要配合TemporalAdjusters这个类，其提供了自由度更高的替换<br>    <img src="https://s2.ax1x.com/2020/02/29/3svQdU.png" alt="3svQdU.png"></p>
+<h3 id="普通日期转换"><a href="#普通日期转换" class="headerlink" title="普通日期转换"></a>普通日期转换</h3><p>&emsp;&emsp;这边的转换指时间日期按照规则计算并返回，并不影响调用对象localDate的原始值</p>
+<pre><code>LocalDate localDate = LocalDate.of(2020, 2, 23);
+localDate.withDayOfMonth(1));  // 转为该月的第1天： 2020-02-01
+localDate.withDayOfYear(1));   // 转为该年的第1天： 2020-01-01
+localDate.withMonth(1));       // 替换月份为1：2020-01-23          localDate.withYear(2019));     // 替换年份为2019：2019-02-23</code></pre><h3 id="高级日期转换"><a href="#高级日期转换" class="headerlink" title="高级日期转换"></a>高级日期转换</h3><p>&emsp;&emsp;高级日期替换需要配合TemporalAdjusters这个类，其提供了自由度更高的替换<br>    <img src="https://s2.ax1x.com/2020/02/29/3svQdU.png" alt="3svQdU.png"></p>
 <p>&emsp;&emsp;具体用法如下：</p>
 <pre><code>LocalDate localDate = LocalDate.of(2020, 2, 23);
 localDate.with(TemporalAdjusters.lastDayOfMonth()));      // 该月最后一天：2020-02-29
