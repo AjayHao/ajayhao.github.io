@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Python3及Django2.6环境搭建 | Ajay&#39;s Blog</title>
-  <meta name="keywords" content=" python , django ">
-  <meta name="description" content="Python3及Django2.6环境搭建 | Ajay&#39;s Blog">
+  <title>Java 8 进阶系列 - Lambda 表达式 | Ajay&#39;s Blog</title>
+  <meta name="keywords" content=" Java ">
+  <meta name="description" content="Java 8 进阶系列 - Lambda 表达式 | Ajay&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="IT科班出身，金融行业码农，由于工作之后技能点乱点，因而无稳定技术流派，已义无反顾投身开源世界 Java爱好者，近期又迷上了Python， 内心深处拒绝“成为码农”却又常常研究代码到深夜 讨厌无趣的人，更害怕自己变成一个那样的人。。 万幸已脱单。。难为妹子了orz So..Don’t Have to Try So Hard..Just relax , and share , and have FU">
 <meta property="og:type" content="website">
@@ -406,9 +406,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-py3-django-env-setup" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-java8-lets-use-lambda" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Python3及Django2.6环境搭建</h1>
+        <h1 class="article-title">Java 8 进阶系列 - Lambda 表达式</h1>
     
     <div class="article-meta">
         
@@ -423,21 +423,19 @@
         
         <span class="tag">
             
-            <a class="color2">python</a>
-            
-            <a class="color2">django</a>
+            <a class="color3">Java</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-10-22 22:07:00'>2019-10-22 22:07</time>
+        创建时间:<time class="date" title='更新时间: 2020-03-07 22:15:47'>2020-03-07 22:15</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:268</span>
+        <span>字数:793</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -456,7 +454,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一-前言"><span class="toc-text">一. 前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二-最佳实践"><span class="toc-text">二. 最佳实践</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-简化内部类的写法"><span class="toc-text">1. 简化内部类的写法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-集合类的迭代"><span class="toc-text">2. 集合类的迭代</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-支持函数编程"><span class="toc-text">3. 支持函数编程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-管道方式的处理"><span class="toc-text">4. 管道方式的处理</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -472,28 +470,77 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Python3及Django2.2环境搭建</p>
-<ol>
-<li><p>安装python，安装后将D:\Software\Common\Anaconda3和D:\Software\Common\Anaconda3\Scripts目录加到系统环境变量path中。</p>
-</li>
-<li><p>安装django，下载 Django 压缩包，解压并和Python安装目录放在同一个根目录，进入 Django 目录，执行python setup.py install，然后开始安装，Django将要被安装到Python的Lib下site-packages。</p>
-</li>
-<li><p>在cmd中执行以下命令，尝试创建新项目。</p>
-</li>
-</ol>
-<pre><code>    django-admin startproject helloPy</code></pre><ol start="4">
-<li>如果报”pkg_resources.DistributionNotFound: The ‘sqlparse’ distribution was not found and is required by Django”，则说明缺少 sqlparse 模块。<br>安装命令：</li>
-</ol>
-<pre><code>    pip install sqlparse</code></pre><ol start="5">
-<li>如果报”mysqlclient 1.3.13 or newer is required;”，则需要升级mysqlclient版本<br>执行以下检查mysqlclient当前版本。</li>
-</ol>
-<pre><code>    pip show mysqlclient</code></pre><p>  a. 在D:\Software\Common\Anaconda3\Lib\site-packages\Django-2.2.6-py3.6.egg\django\db\backends\mysql中修改base.py，注释掉以下语句：</p>
-<pre><code class="python">  if version &lt; (1, 3, 13):
-      raise ImproperlyConfigured(&#39;mysqlclient 1.3.13 or newer is required; you have %s.&#39; % Database.__version__)</code></pre>
-<p>  b. D:\Software\Common\Anaconda3\Lib\site-packages\Django-2.2.6-py3.6.egg\django\db\backends\mysql中修改operations.py，将第146行：</p>
-<pre><code class="python">    query = query.decode(errors=&#39;replace&#39;) </code></pre>
-<p>  修改为</p>
-<pre><code class="python">    query = query.encode(errors=&#39;replace&#39;)</code></pre>
+        <p><div class='inner-toc'><h2>目录</h2><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一-前言"><span class="toc-text">一. 前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二-最佳实践"><span class="toc-text">二. 最佳实践</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-简化内部类的写法"><span class="toc-text">1. 简化内部类的写法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-集合类的迭代"><span class="toc-text">2. 集合类的迭代</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-支持函数编程"><span class="toc-text">3. 支持函数编程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-管道方式的处理"><span class="toc-text">4. 管道方式的处理</span></a></li></ol></li></ol></div></p>
+<h1 id="一-前言"><a href="#一-前言" class="headerlink" title="一. 前言"></a>一. 前言</h1><p>&emsp;&emsp;Lambda表达式是Java 8最重要的一个新特性，它允许我们将行为传到函数里。在Java 8之前，如果想将行为传入函数，仅有的选择就是匿名类，匿名类的写法代码冗长且需要遵循特定的代码模板。Lambda表达式取代了匿名类，取消了模板，允许用函数式风格编写代码；使得代码精简的同时，可读性更好，表达更清晰。<br>&emsp;&emsp;下面我们来看几个最佳实践</p>
+<h1 id="二-最佳实践"><a href="#二-最佳实践" class="headerlink" title="二. 最佳实践"></a>二. 最佳实践</h1><h2 id="1-简化内部类的写法"><a href="#1-简化内部类的写法" class="headerlink" title="1. 简化内部类的写法"></a>1. 简化内部类的写法</h2><p>&emsp;&emsp;熟悉lambda的最快方法是使用lambda表达式替换匿名类，比如构造线程时的Runnable接口</p>
+<pre><code>// Java 8之前：
+new Thread(new Runnable() {
+    @Override
+    public void run() {
+    System.out.println(&quot;Before Java8, too much code for too little to do&quot;);
+    }
+}).start();</code></pre><pre><code>//Java 8方式：
+new Thread( () -&gt; System.out.println(&quot;In Java8, Lambda expression rocks !!&quot;) ).start();</code></pre><h2 id="2-集合类的迭代"><a href="#2-集合类的迭代" class="headerlink" title="2. 集合类的迭代"></a>2. 集合类的迭代</h2><p>&emsp;&emsp;针对集合类，最常见的操作就是进行循环，并将业务逻辑应用于各个元素。使用Java 8的Lambda表达式对集合做迭代操作简便很多。</p>
+<pre><code>// Java 8之前：
+List features = Arrays.asList(&quot;Lambdas&quot;, &quot;Default Method&quot;, &quot;Stream API&quot;, &quot;Date and Time API&quot;);
+for (String feature : features) {
+    System.out.println(feature);
+}</code></pre><pre><code>// Java 8之后：
+List features = Arrays.asList(&quot;Lambdas&quot;, &quot;Default Method&quot;, &quot;Stream API&quot;, &quot;Date and Time API&quot;);
+features.forEach(n -&gt; System.out.println(n));
+// 使用Java 8的方法引用更方便，方法引用由::双冒号操作符标示，
+features.forEach(System.out::println);</code></pre><p>输出结果：</p>
+<pre><code>Lambdas
+Default Method
+Stream API
+Date and Time API</code></pre><h2 id="3-支持函数编程"><a href="#3-支持函数编程" class="headerlink" title="3. 支持函数编程"></a>3. 支持函数编程</h2><p>&emsp;&emsp;为了支持函数编程，Java 8加入了一个新的包java.util.function，其中有一个接口java.util.function.Predicate是支持Lambda函数编程：</p>
+<pre><code>public static void filter(List names, Predicate condition) {
+  names.stream().filter((name) -&gt; (condition.test(name)))
+    .forEach((name) -&gt; {System.out.println(name + &quot; &quot;);
+  });
+}
+
+public static void main(args[]){
+  List languages = Arrays.asList(&quot;Java&quot;, &quot;Scala&quot;, &quot;C++&quot;, &quot;Haskell&quot;, &quot;Lisp&quot;);
+
+  System.out.println(&quot;Languages which starts with J :&quot;);
+  filter(languages, (str)-&gt;str.startsWith(&quot;J&quot;));
+
+  System.out.println(&quot;Languages which ends with a &quot;);
+  filter(languages, (str)-&gt;str.endsWith(&quot;a&quot;));
+
+  System.out.println(&quot;Print all languages :&quot;);
+  filter(languages, (str)-&gt;true);
+
+   System.out.println(&quot;Print no language : &quot;);
+   filter(languages, (str)-&gt;false);
+
+   System.out.println(&quot;Print language whose length greater than 4:&quot;);
+   filter(languages, (str)-&gt;str.length() &gt; 4);
+}</code></pre><p>输出结果：</p>
+<pre><code>Output:
+Languages which starts with J :
+Java
+Languages which ends with a
+Java
+Scala
+Print all languages :
+Java
+Scala
+C++
+Haskell
+Lisp
+Print no language :
+Print language whose length greater than 4:
+Scala
+Haskell</code></pre><h2 id="4-管道方式的处理"><a href="#4-管道方式的处理" class="headerlink" title="4. 管道方式的处理"></a>4. 管道方式的处理</h2><p>&emsp;&emsp;Java 8里面新增的Stream API ，让集合中的数据处理起来更加方便，性能更高，可读性更好。</p>
+<p>&emsp;&emsp;假设一个业务场景：对于20元以上的商品，进行9折处理，最后得到这些商品的折后价格。</p>
+<pre><code>final BigDecimal totalOfDiscountedPrices = prices.stream()
+.filter(price -&gt; price.compareTo(BigDecimal.valueOf(20)) &gt; 0)
+.map(price -&gt; price.multiply(BigDecimal.valueOf(0.9)))
+.reduce(BigDecimal.ZERO,BigDecimal::add);
+
+System.out.println(&quot;Total of discounted prices: &quot; + totalOfDiscountedPrices);</code></pre><p>&emsp;&emsp;如上例所示，用面向对象处理这些数据，需要多少行、循环，需要声明多少个中间变量。而使用lambda表达式后，可以以极其简洁的代码量完成。</p>
 
       
        
@@ -503,12 +550,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>Python3及Django2.6环境搭建</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">268</span></p>
+    <p><span class="copy-title">文章标题:</span>Java 8 进阶系列 - Lambda 表达式</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">833</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Hao Zhenjie">Hao Zhenjie</a></p>
-    <p><span class="copy-title">发布时间:</span>2019-10-22, 22:07:00</p>
-    <p><span class="copy-title">最后更新:</span>2019-10-22, 22:07:00</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/10/22/py3-django-env-setup/" title="Python3及Django2.6环境搭建">http://ajayhao.github.io/2019/10/22/py3-django-env-setup/</a>
+    <p><span class="copy-title">发布时间:</span>2020-03-07, 22:15:47</p>
+    <p><span class="copy-title">最后更新:</span>2020-03-07, 22:15:47</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/07/java8-lets-use-lambda/" title="Java 8 进阶系列 - Lambda 表达式">http://ajayhao.github.io/2020/03/07/java8-lets-use-lambda/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
