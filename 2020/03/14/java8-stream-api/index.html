@@ -570,7 +570,7 @@ Stream.of(sixNums).findFirst().ifPresent(System.out::println);
 
 Stream.of(sixNums).findAny().ifPresent(System.out::println);
 // 返回的Optional 可以加上逻辑排除NPE
-Integer else1 = Stream.of(sixNums).filter(x-&gt;x&lt;0).findAny().orElse(null);</code></pre><p>&emsp;&emsp;findFisrt、findAny找不到元素抛出NPE。可以加上Or系列方法返回默认值</p>
+Integer else1 = Stream.of(sixNums).filter(x-&gt;x&lt;0).findAny().orElse(null);</code></pre><p>&emsp;&emsp;findFirst、findAny找不到元素抛出NPE。可以加上Or系列方法返回默认值</p>
 <h2 id="（五）reduce"><a href="#（五）reduce" class="headerlink" title="（五）reduce"></a>（五）reduce</h2><p>&emsp;&emsp;这个方法的主要作用是把identity作为第二个参数BinaryOperator 函数的输入,执行操作后返回。</p>
 <pre><code>// 字符串连接，concat = &quot;ABCD&quot;
 String concat = Stream.of(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;).reduce(&quot;&quot;, String::concat); 
