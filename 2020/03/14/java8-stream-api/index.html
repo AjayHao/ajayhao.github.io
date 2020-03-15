@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Java 8 进阶系列 - Stream API | Ajay&#39;s Blog</title>
+  <meta name="keywords" content=" Java ">
+  <meta name="description" content="Java 8 进阶系列 - Stream API | Ajay&#39;s Blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="IT科班出身，金融行业码农，由于工作之后技能点乱点，因而无稳定技术流派，已义无反顾投身开源世界 Java爱好者，近期又迷上了Python， 内心深处拒绝“成为码农”却又常常研究代码到深夜 讨厌无趣的人，更害怕自己变成一个那样的人。。 万幸已脱单。。难为妹子了orz So..Don’t Have to Try So Hard..Just relax , and share , and have FU">
+<meta property="og:type" content="website">
+<meta property="og:title" content="关于">
+<meta property="og:url" content="http:&#x2F;&#x2F;ajayhao.github.io&#x2F;about&#x2F;index.html">
+<meta property="og:site_name" content="Ajay&#39;s Blog">
+<meta property="og:description" content="IT科班出身，金融行业码农，由于工作之后技能点乱点，因而无稳定技术流派，已义无反顾投身开源世界 Java爱好者，近期又迷上了Python， 内心深处拒绝“成为码农”却又常常研究代码到深夜 讨厌无趣的人，更害怕自己变成一个那样的人。。 万幸已脱单。。难为妹子了orz So..Don’t Have to Try So Hard..Just relax , and share , and have FU">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-01-22T14:00:00.000Z">
+<meta property="article:modified_time" content="2016-01-22T14:00:00.000Z">
+<meta property="article:author" content="Hao Zhenjie">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/images/favicon.png">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/github.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.0.1" ></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+<meta name="generator" content="Hexo 4.1.1"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value="">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/images/avatar.png" />
+</a>
+<div class="author">
+    <span>Hao Zhenjie</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+        <a title="github" href="https://github.com/ajayhao/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:ajay.hao@gmail.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(17)</small></div></li>
+    
+        
+            
+            <li><div data-rel="金融业务">金融业务<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="技术">技术<small>(12)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="生活">生活<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="17">
+<input type="hidden" id="yelog_site_word_count" value="61.9k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://blog.didispace.com/">程序猿DD</a></li>
+            
+            <li><a target="_blank" href="http://www.ruanyifeng.com/blog/">阮大神(阮一峰)</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color5">会计核算</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">git</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">markdown</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">maven</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Mybatis</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">java</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">python</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">django</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">J2EE</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">杂谈</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">多线程</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">echarts</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">可视化</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">TA</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">基金业务</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">金融</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Java</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="技术 "
+           href="/2020/03/14/java8-stream-api/"
+           data-tag="Java"
+           data-author="" >
+            <span class="post-title" title="Java 8 进阶系列 - Stream API">Java 8 进阶系列 - Stream API</span>
+            <span class="post-date" title="2020-03-14 16:15:47">2020/03/14</span>
+        </a>
+        
+        <a  class="技术 "
+           href="/2020/03/07/java8-lets-use-lambda/"
+           data-tag="Java"
+           data-author="" >
+            <span class="post-title" title="Java 8 进阶系列 - Lambda 表达式">Java 8 进阶系列 - Lambda 表达式</span>
+            <span class="post-date" title="2020-03-07 22:15:47">2020/03/07</span>
+        </a>
+        
+        <a  class="技术 "
+           href="/2020/02/29/java8-new-datetime-lib/"
+           data-tag="Java"
+           data-author="" >
+            <span class="post-title" title="Java 8 进阶系列 - 新日期/时间库">Java 8 进阶系列 - 新日期/时间库</span>
+            <span class="post-date" title="2020-02-29 14:17:03">2020/02/29</span>
+        </a>
+        
+        <a  class="技术 "
+           href="/2020/02/06/echarts-demo/"
+           data-tag="echarts,可视化"
+           data-author="" >
+            <span class="post-title" title="数据分析可视化工具之 - Echarts">数据分析可视化工具之 - Echarts</span>
+            <span class="post-date" title="2020-02-06 22:14:00">2020/02/06</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/28/index-encyclopedia/"
+           data-tag="金融"
+           data-author="" >
+            <span class="post-title" title="中国金融体系指标大全">中国金融体系指标大全</span>
+            <span class="post-date" title="2020-01-28 23:09:00">2020/01/28</span>
+        </a>
+        
+        <a  class="技术 "
+           href="/2019/10/22/py3-django-env-setup/"
+           data-tag="python,django"
+           data-author="" >
+            <span class="post-title" title="Python3及Django2.6环境搭建">Python3及Django2.6环境搭建</span>
+            <span class="post-date" title="2019-10-22 22:07:00">2019/10/22</span>
+        </a>
+        
+        <a  class="技术 "
+           href="/2017/07/13/mybatis-jdbcType-javaType/"
+           data-tag="Mybatis,java"
+           data-author="" >
+            <span class="post-title" title="Mybatis-JDBCType与javaType映射关系">Mybatis-JDBCType与javaType映射关系</span>
+            <span class="post-date" title="2017-07-13 18:31:00">2017/07/13</span>
+        </a>
+        
+        <a  class="技术 "
+           href="/2016/11/30/multithread-volatile/"
+           data-tag="多线程"
+           data-author="" >
+            <span class="post-title" title="Java多线程系列(一)-正确使用 Volatile 变量">Java多线程系列(一)-正确使用 Volatile 变量</span>
+            <span class="post-date" title="2016-11-30 17:09:02">2016/11/30</span>
+        </a>
+        
+        <a  class="金融业务 "
+           href="/2016/07/03/ta-bizcode/"
+           data-tag="TA,基金业务"
+           data-author="" >
+            <span class="post-title" title="TA数据交换信息速查">TA数据交换信息速查</span>
+            <span class="post-date" title="2016-07-03 09:31:00">2016/07/03</span>
+        </a>
+        
+        <a  class="金融业务 "
+           href="/2016/06/22/accounting-framework/"
+           data-tag="会计核算"
+           data-author="" >
+            <span class="post-title" title="会计核算框架">会计核算框架</span>
+            <span class="post-date" title="2016-06-22 22:31:00">2016/06/22</span>
+        </a>
+        
+        <a  class="技术 "
+           href="/2016/05/29/suitable-struct/"
+           data-tag="J2EE"
+           data-author="" >
+            <span class="post-title" title="J2EE代码结构推荐">J2EE代码结构推荐</span>
+            <span class="post-date" title="2016-05-29 12:09:00">2016/05/29</span>
+        </a>
+        
+        <a  class="技术 "
+           href="/2016/04/26/git-sshkey/"
+           data-tag="git"
+           data-author="" >
+            <span class="post-title" title="应对多套git环境的ssh-key管理方案">应对多套git环境的ssh-key管理方案</span>
+            <span class="post-date" title="2016-04-26 19:09:00">2016/04/26</span>
+        </a>
+        
+        <a  class="生活 "
+           href="/2016/04/24/reasons-for-quit/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="ICBC，再见！">ICBC，再见！</span>
+            <span class="post-date" title="2016-04-24 00:10:00">2016/04/24</span>
+        </a>
+        
+        <a  class="技术 "
+           href="/2016/04/12/maven-project/"
+           data-tag="maven"
+           data-author="" >
+            <span class="post-title" title="典型Maven化的Web工程">典型Maven化的Web工程</span>
+            <span class="post-date" title="2016-04-12 21:30:00">2016/04/12</span>
+        </a>
+        
+        <a  class="技术 "
+           href="/2016/03/31/git-management/"
+           data-tag="git"
+           data-author="" >
+            <span class="post-title" title="git常用操作示例">git常用操作示例</span>
+            <span class="post-date" title="2016-03-31 20:30:00">2016/03/31</span>
+        </a>
+        
+        <a  class="技术 "
+           href="/2016/02/03/markdown-ref/"
+           data-tag="markdown"
+           data-author="" >
+            <span class="post-title" title="Markdown语法速查表">Markdown语法速查表</span>
+            <span class="post-date" title="2016-02-03 21:00:00">2016/02/03</span>
+        </a>
+        
+        <a  class="生活 "
+           href="/2016/01/18/virgin-post/"
+           data-tag="杂谈"
+           data-author="" >
+            <span class="post-title" title="启航">启航</span>
+            <span class="post-date" title="2016-01-18 21:30:00">2016/01/18</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-java8-stream-api" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">Java 8 进阶系列 - Stream API</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="技术">技术</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color4">Java</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-03-14 16:15:47'>2020-03-14 16:15</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:1.9k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一-前言"><span class="toc-text">一. 前言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#（一）概述"><span class="toc-text">（一）概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（二）流的操作分类"><span class="toc-text">（二）流的操作分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Intermediate（中间操作）"><span class="toc-text">1. Intermediate（中间操作）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Terminal（终止操作）"><span class="toc-text">2. Terminal（终止操作）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二-流的创建"><span class="toc-text">二. 流的创建</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#（一）常用创建方式"><span class="toc-text">（一）常用创建方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-独立的值"><span class="toc-text">1. 独立的值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-数组"><span class="toc-text">2. 数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-集合"><span class="toc-text">3. 集合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（二）包装类型的构造"><span class="toc-text">（二）包装类型的构造</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（三）并行流的规则输出"><span class="toc-text">（三）并行流的规则输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（四）流的转换"><span class="toc-text">（四）流的转换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-数组"><span class="toc-text">1. 数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-集合"><span class="toc-text">2. 集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-String"><span class="toc-text">3. String</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三-流操作"><span class="toc-text">三. 流操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#（一）map映射"><span class="toc-text">（一）map映射</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-一对一"><span class="toc-text">1. 一对一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-合并流"><span class="toc-text">2. 合并流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-合并流到其他类型-一对多"><span class="toc-text">3. 合并流到其他类型 - 一对多</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-转大小写、平方数等"><span class="toc-text">4. 转大小写、平方数等</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（二）filter-过滤器"><span class="toc-text">（二）filter 过滤器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（三）foreach-peek-Intermediate-输出"><span class="toc-text">（三）foreach peek(Intermediate) 输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（四）findFirst、findAny"><span class="toc-text">（四）findFirst、findAny</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（五）reduce"><span class="toc-text">（五）reduce</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（六）limit-skip"><span class="toc-text">（六）limit&#x2F;skip</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#未完待续"><span class="toc-text">未完待续</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><div class='inner-toc'><h2>目录</h2><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一-前言"><span class="toc-text">一. 前言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#（一）概述"><span class="toc-text">（一）概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（二）流的操作分类"><span class="toc-text">（二）流的操作分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Intermediate（中间操作）"><span class="toc-text">1. Intermediate（中间操作）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Terminal（终止操作）"><span class="toc-text">2. Terminal（终止操作）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二-流的创建"><span class="toc-text">二. 流的创建</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#（一）常用创建方式"><span class="toc-text">（一）常用创建方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-独立的值"><span class="toc-text">1. 独立的值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-数组"><span class="toc-text">2. 数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-集合"><span class="toc-text">3. 集合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（二）包装类型的构造"><span class="toc-text">（二）包装类型的构造</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（三）并行流的规则输出"><span class="toc-text">（三）并行流的规则输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（四）流的转换"><span class="toc-text">（四）流的转换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-数组"><span class="toc-text">1. 数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-集合"><span class="toc-text">2. 集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-String"><span class="toc-text">3. String</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三-流操作"><span class="toc-text">三. 流操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#（一）map映射"><span class="toc-text">（一）map映射</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-一对一"><span class="toc-text">1. 一对一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-合并流"><span class="toc-text">2. 合并流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-合并流到其他类型-一对多"><span class="toc-text">3. 合并流到其他类型 - 一对多</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-转大小写、平方数等"><span class="toc-text">4. 转大小写、平方数等</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（二）filter-过滤器"><span class="toc-text">（二）filter 过滤器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（三）foreach-peek-Intermediate-输出"><span class="toc-text">（三）foreach peek(Intermediate) 输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（四）findFirst、findAny"><span class="toc-text">（四）findFirst、findAny</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（五）reduce"><span class="toc-text">（五）reduce</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（六）limit-skip"><span class="toc-text">（六）limit&#x2F;skip</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#未完待续"><span class="toc-text">未完待续</span></a></li></ol></li></ol></div></p>
+<h1 id="一-前言"><a href="#一-前言" class="headerlink" title="一. 前言"></a>一. 前言</h1><h2 id="（一）概述"><a href="#（一）概述" class="headerlink" title="（一）概述"></a>（一）概述</h2><p>&emsp;&emsp;Stream API是Java 8版本的又一大利器，借助于同样新出现的 Lambda 表达式，极大的提高编程效率和程序可读性。 尤其对于集合元素的遍历、过滤、数据汇聚等方面，在早版本的迭代器之外给另一种更优的方案。</p>
+<p>&emsp;&emsp;Stream API提供串行和并行两种模式，串行模式与传统Iterator类似，数据按照一个方向流动，进行单向处理；而并发模式能够充分利用多核处理器的优势。 </p>
+<p>&emsp;&emsp;Stream 的并行操作依赖于 Java7 中引入的 Fork/Join 框架（JSR166y）来拆分任务和加速处理过程。通常编写并行代码很难而且容易出错，但使用 Stream API 无需编写一行多线程的代码，就可以很方便地写出高性能的并发程序。</p>
+<h2 id="（二）流的操作分类"><a href="#（二）流的操作分类" class="headerlink" title="（二）流的操作分类"></a>（二）流的操作分类</h2><h3 id="1-Intermediate（中间操作）"><a href="#1-Intermediate（中间操作）" class="headerlink" title="1. Intermediate（中间操作）"></a>1. Intermediate（中间操作）</h3><p> &emsp;&emsp; <strong>Intermediate具有Lambda延迟性，不会立刻触发操作。</strong> 一个流可以后面跟随零个或多个 intermediate 操作。其目的主要是打开流，做出某种程度的数据映射 / 过滤，然后返回一个新的流，交给下一个操作使用。这类操作都是惰性化的（lazy），就是说，仅仅调用到这类方法，并没有真正开始流的遍历。</p>
+<p>  &emsp;&emsp; 中间操作又可以分为无状态的(Stateless)和有状态的(Stateful)，无状态的中间操作是指元素的处理不受前面元素的影响，而有状态的中间操作必须等到所有元素处理之后才知道最终结果，比如排序是有状态操作，在读取所有元素之前并不能确定排序结果，filter是无状态操作，符合过滤条件就被选出来，不关注其他元素的状态。</p>
+<h3 id="2-Terminal（终止操作）"><a href="#2-Terminal（终止操作）" class="headerlink" title="2. Terminal（终止操作）"></a>2. Terminal（终止操作）</h3><p> &emsp;&emsp; <strong>Terminal触发整个流的操作。</strong> 一个流只能有一个 terminal 操作，当这个操作执行后，流就被使用 “光” 了，无法再被操作。所以这必定是流的最后一个操作。Terminal 操作的执行，才会真正开始流的遍历，并且生成结果。</p>
+<p> &emsp;&emsp;终止操作又可以分为短路操作和非短路操作，短路操作是指不用处理全部元素就可以返回结果，比如找到第一个满足条件的元素。</p>
+<table class="table table-bordered table-hover table-valign-middle" style="font-size: 14px;text-align:center">
+<thead>
+<tr>
+<th width="40%" colspan="2">操作类型</th>
+<th width="60%">接口方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td rowspan="2" width="20%">Intermediate（中间操作）</td>
+<td width="20%">无状态(Stateless)</td>
+<td>
+map(mapToInt、mapToLong、flatmap、mapToDouble、 flatMapToInt、flatMapToLong、flatMapToDouble)、unordered、filter、 peek、 parallel 、sequential  、isParallel
+</td>
+</tr>
+<tr>
+<td>有状态(Stateful)</td>
+<td>distinct、 sorted、limit、 skip</td>
+</tr>
+<tr>
+<td rowspan="2">Terminal（最终操作）</td>
+<td>非短路操作</td>
+<td>
+forEach、forEachOrdered、 toArray、 reduce、collect、 max、min、count
+</td>
+</tr>
+<tr>
+<td>Short-circuiting（短路操作）</td>
+<td>anyMatch、allMatch、noneMatch、findFirst、 findAny</td>
+</tr>
+</tbody>
+</table>
+
+
+<h1 id="二-流的创建"><a href="#二-流的创建" class="headerlink" title="二. 流的创建"></a>二. 流的创建</h1><h2 id="（一）常用创建方式"><a href="#（一）常用创建方式" class="headerlink" title="（一）常用创建方式"></a>（一）常用创建方式</h2><h2 id="1-独立的值"><a href="#1-独立的值" class="headerlink" title="1. 独立的值"></a>1. 独立的值</h2><pre><code>Stream stream = Stream.of(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;);</code></pre><h2 id="2-数组"><a href="#2-数组" class="headerlink" title="2. 数组"></a>2. 数组</h2><pre><code>String [] strArray = new String[] {&quot;a&quot;, &quot;b&quot;, &quot;c&quot;};
+stream = Stream.of(strArray);
+stream = Arrays.stream(strArray);</code></pre><h2 id="3-集合"><a href="#3-集合" class="headerlink" title="3. 集合"></a>3. 集合</h2><pre><code>List&lt;String&gt; list = Arrays.asList(strArray);
+stream = list.stream();</code></pre><h2 id="（二）包装类型的构造"><a href="#（二）包装类型的构造" class="headerlink" title="（二）包装类型的构造"></a>（二）包装类型的构造</h2><p>&emsp;&emsp;可以使用 Stream&lt;Integer&gt;、 Stream&lt;Double&gt;、 Stream&lt;Long&gt; ， 但是装箱、拆箱非常耗时，建议谨慎使用。</p>
+<pre><code> IntStream ints = IntStream.of(1,2,3);
+ LongStream longs = LongStream.of(4,5,6);
+ DoubleStream doubles = DoubleStream.of(6,7,8);
+
+ IntStream.range(1, 10).forEach(System.out::print);// [1,10) 区间
+ IntStream.rangeClosed(1, 10).forEach(System.out::print);//[1,10] 区间</code></pre><h2 id="（三）并行流的规则输出"><a href="#（三）并行流的规则输出" class="headerlink" title="（三）并行流的规则输出"></a>（三）并行流的规则输出</h2><p>&emsp;&emsp;parallel() 方法将普通流转换为并行流</p>
+<pre><code>IntStream.range(1, 10).parallel().forEach(System.out::print); // 并行执行 效率高 但是输出结果不具备输入结果的有序性
+IntStream.range(1, 10).parallel().forEachOrdered(System.out::print);// 并行执行 效率高  严格要求输出结果按照输入结果顺序</code></pre><h2 id="（四）流的转换"><a href="#（四）流的转换" class="headerlink" title="（四）流的转换"></a>（四）流的转换</h2><p>&emsp;&emsp;通过collect() 方法将流中的数据转成集合与值</p>
+<h3 id="1-数组"><a href="#1-数组" class="headerlink" title="1. 数组"></a>1. 数组</h3><pre><code>String[] strArray1 = stream.toArray(String[]::new);</code></pre><h3 id="2-集合"><a href="#2-集合" class="headerlink" title="2. 集合"></a>2. 集合</h3><pre><code>List&lt;String&gt; list1 = stream.collect(Collectors.toList());
+List&lt;String&gt; list2 = stream.collect(Collectors.toCollection(ArrayList::new));
+Set set1 = stream.collect(Collectors.toSet());
+Stack stack1 = stream.collect(Collectors.toCollection(Stack::new));</code></pre><h3 id="3-String"><a href="#3-String" class="headerlink" title="3. String"></a>3. String</h3><pre><code>String str = stream.collect(Collectors.joining()).toString();</code></pre><h1 id="三-流操作"><a href="#三-流操作" class="headerlink" title="三. 流操作"></a>三. 流操作</h1><h2 id="（一）map映射"><a href="#（一）map映射" class="headerlink" title="（一）map映射"></a>（一）map映射</h2><h3 id="1-一对一"><a href="#1-一对一" class="headerlink" title="1. 一对一"></a>1. 一对一</h3><pre><code>IntStream.of(1,2,3).map(x-&gt;x*2).forEach(System.out::println);</code></pre><h3 id="2-合并流"><a href="#2-合并流" class="headerlink" title="2. 合并流"></a>2. 合并流</h3><pre><code>Stream&lt;List&lt;Integer&gt;&gt; inputStream = Stream.of(
+                Arrays.asList(1),
+                Arrays.asList(2,3),
+                Arrays.asList(4,5,6));
+Stream&lt;Integer&gt; child_stream = inputStream.flatMap(x-&gt;x.stream());</code></pre><h3 id="3-合并流到其他类型-一对多"><a href="#3-合并流到其他类型-一对多" class="headerlink" title="3. 合并流到其他类型 - 一对多"></a>3. 合并流到其他类型 - 一对多</h3><pre><code>DoubleStream doubleStream = inputStream.flatMapToDouble(x-&gt;x.stream().mapToDouble(Double::new));
+IntStream intStream = inputStream.flatMapToInt(x-&gt;x.stream().mapToInt(Integer::new));
+LongStream longStream = inputStream.flatMapToLong(x-&gt;x.stream().mapToLong(Long::new));</code></pre><h3 id="4-转大小写、平方数等"><a href="#4-转大小写、平方数等" class="headerlink" title="4. 转大小写、平方数等"></a>4. 转大小写、平方数等</h3><pre><code>List&lt;String&gt; output = wordList.stream().map(String::toUpperCase).collect(Collectors.toList());
+List&lt;Integer&gt; nums = Arrays.asList(1, 2, 3, 4);
+List&lt;Integer&gt; squareNums = nums.stream().map(n -&gt; n * n).collect(Collectors.toList()); </code></pre><h2 id="（二）filter-过滤器"><a href="#（二）filter-过滤器" class="headerlink" title="（二）filter 过滤器"></a>（二）filter 过滤器</h2><pre><code>//留下偶数
+IntStream.range(1, 10).filter(x-&gt;(x&amp;1)==0).forEach(System.out::println);
+
+Integer[] sixNums = {1, 2, 3, 4, 5, 6};
+Integer[] array = Stream.of(sixNums).filter(x-&gt;(x&amp;1)==0).toArray(Integer[]::new);
+
+//  把单词挑出来
+List&lt;String&gt; output = reader.lines().flatMap(line -&gt; Stream.of(line.split(REGEXP))).filter(word -&gt; word.length() &gt; 0).collect(Collectors.toList());</code></pre><h2 id="（三）foreach-peek-Intermediate-输出"><a href="#（三）foreach-peek-Intermediate-输出" class="headerlink" title="（三）foreach peek(Intermediate) 输出"></a>（三）foreach peek(Intermediate) 输出</h2><pre><code>Stream&lt;List&lt;Integer&gt;&gt; stream = Stream.of(Arrays.asList(1,2,3,4,5,6));
+
+stream.parallel().forEach(System.out::println);
+stream.parallel().forEachOrdered(System.out::println); //并行 强制有序
+// 体现了 访问者设计模式
+Stream.of(&quot;one&quot;, &quot;two&quot;, &quot;three&quot;, &quot;four&quot;)
+    .filter(e -&gt; e.length() &gt; 3)
+    .peek(e -&gt; System.out.println(&quot;Filtered value: &quot; + e))
+    .map(String::toUpperCase)
+    .peek(e -&gt; System.out.println(&quot;Mapped value: &quot; + e))
+    .collect(Collectors.toList());</code></pre><p>输出结果： </p>
+<pre><code>Filtered value: three
+Mapped value: THREE
+Filtered value: four
+Mapped value: FOUR</code></pre><h2 id="（四）findFirst、findAny"><a href="#（四）findFirst、findAny" class="headerlink" title="（四）findFirst、findAny"></a>（四）findFirst、findAny</h2><p>&emsp;&emsp;findAny、max/min、reduce 等方法返回Optional 非终结操作，可以对结果继续处理。 使用它的目的是尽可能避免 NullPointerException。 </p>
+<pre><code>Integer[] sixNums = {1, 2, 3, 4, 5, 6};
+Stream.of(sixNums).findFirst().ifPresent(System.out::println);
+
+Stream.of(sixNums).findAny().ifPresent(System.out::println);
+// 返回的Optional 可以加上逻辑排除NPE
+Integer else1 = Stream.of(sixNums).filter(x-&gt;x&lt;0).findAny().orElse(null);</code></pre><p>&emsp;&emsp;findFisrt、findAny找不到元素抛出NPE。可以加上Or系列方法返回默认值</p>
+<h2 id="（五）reduce"><a href="#（五）reduce" class="headerlink" title="（五）reduce"></a>（五）reduce</h2><p>&emsp;&emsp;这个方法的主要作用是把identity作为第二个参数BinaryOperator 函数的输入,执行操作后返回。</p>
+<pre><code>// 字符串连接，concat = &quot;ABCD&quot;
+String concat = Stream.of(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;).reduce(&quot;&quot;, String::concat); 
+// 求最小值，minValue = -3.0
+double minValue = Stream.of(-1.5, 1.0, -3.0, -2.0).reduce(Double.MAX_VALUE, Double::min); 
+// 求和，sumValue = 10, 有起始值
+int sumValue = Stream.of(1, 2, 3, 4).reduce(0, Integer::sum);
+// 求和，sumValue = 10, 无起始值
+sumValue = Stream.of(1, 2, 3, 4).reduce(Integer::sum).get();
+// 过滤，字符串连接，concat = &quot;ace&quot;
+concat = Stream.of(&quot;a&quot;, &quot;B&quot;, &quot;c&quot;, &quot;D&quot;, &quot;e&quot;, &quot;F&quot;).
+ filter(x -&gt; x.compareTo(&quot;Z&quot;) &gt; 0).
+ reduce(&quot;&quot;, String::concat);</code></pre><p>&emsp;&emsp;以上 字符串拼接、数值的 sum、min、max、average 都是特殊的 reduce</p>
+<h2 id="（六）limit-skip"><a href="#（六）limit-skip" class="headerlink" title="（六）limit/skip"></a>（六）limit/skip</h2><p>&emsp;&emsp;limit返回Stream的前面n个元素；skip则是扔掉前n个元素</p>
+<pre><code>List&lt;String&gt; personList = persons.stream().map(Person::getName).limit(10).skip(3).collect(Collectors.toList());</code></pre><p> <strong>limit/skip ,放在sorted()后面并不能影响排序的次数</strong></p>
+<p>&emsp;&emsp;有一种情况是 limit/skip 无法达到 short-circuiting 目的的，就是把它们放在 Stream 的排序操作后，原因跟 sorted 这个 intermediate 操作有关：此时系统并不知道 Stream 排序后的次序如何，所以 sorted 中的操作看上去就像完全没有被 limit 或者 skip 一样</p>
+<p> <strong>并行流情况下不能使用limit() 将会影响并行操作的次序性能</strong></p>
+<p>&emsp;&emsp;对一个 parallel 的 Steam 管道来说，如果其元素是有序的，那么 limit 操作的成本会比较大，因为它的返回对象必须是前 n 个也有一样次序的元素。取而代之的策略是取消元素间的次序，或者不要用 parallel Stream。</p>
+<h2 id="未完待续"><a href="#未完待续" class="headerlink" title="未完待续"></a>未完待续</h2>
+      
+       
+    </div>
+</article>
+
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>Java 8 进阶系列 - Stream API</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">2.1k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Hao Zhenjie">Hao Zhenjie</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-03-14, 16:15:47</p>
+    <p><span class="copy-title">最后更新:</span>2020-03-14, 16:15:47</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/14/java8-stream-api/" title="Java 8 进阶系列 - Stream API">http://ajayhao.github.io/2020/03/14/java8-stream-api/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2017 Hao Zhenjie</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#会计核算','#git','#markdown','#maven','#Mybatis','#java','#python','#django','#J2EE','#杂谈','#多线程','#echarts','#可视化','#TA','#基金业务','#金融','#Java',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://s2.ax1x.com/2020/01/04/lwsieP.jpg");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+    .post .pjax article :not(pre) > code {
+        color: #24292e;
+        font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+        background-color: rgba(27,31,35,.05);
+        border-radius: 3px;
+        font-size: 85%;
+        margin: 0;
+        padding: .2em .4em;
+    }
+    
+</style>
+
+
+
+
+
+
+
+</html>
