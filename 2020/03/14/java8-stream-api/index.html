@@ -120,7 +120,7 @@
 
 
 <ul>
-    <li><div class="all active">全部文章<small>(17)</small></div></li>
+    <li><div class="all active">全部文章<small>(18)</small></div></li>
     
         
             
@@ -132,7 +132,7 @@
     
         
             
-            <li><div data-rel="技术">技术<small>(12)</small></div>
+            <li><div data-rel="技术">技术<small>(13)</small></div>
                 
             </li>
             
@@ -156,8 +156,8 @@
     </div>
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="17">
-<input type="hidden" id="yelog_site_word_count" value="62.6k">
+<input type="hidden" id="yelog_site_posts_number" value="18">
+<input type="hidden" id="yelog_site_word_count" value="63.2k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -265,6 +265,14 @@
 
     
     <nav id="title-list-nav">
+        
+        <a  class="技术 "
+           href="/2020/03/22/pyinstaller-reduce-file-size/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="Python打包exe文件压缩">Python打包exe文件压缩</span>
+            <span class="post-date" title="2020-03-22 12:04:00">2020/03/22</span>
+        </a>
         
         <a  class="技术 "
            href="/2020/03/14/java8-stream-api/"
@@ -635,7 +643,7 @@ private class Person{
     // Constructor get set toString()
 }</code></pre><h2 id="（二）iterate"><a href="#（二）iterate" class="headerlink" title="（二）iterate"></a>（二）iterate</h2><p>&emsp;&emsp;iterate 跟 reduce 操作很像，接受一个种子值，和一个 UnaryOperator（例如 f）。</p>
 <p>&emsp;&emsp;然后种子值成为 Stream 的第一个元素，f(seed) 为第二个，f(f(seed)) 第三个，以此类推。</p>
-<pre><code>Stream.iterate(0, n -&gt; n + 3).limit(10). forEach(x -&gt; System.out.print(x + &quot; &quot;));
+<pre><code>Stream.iterate(0, n -&gt; n + 3).limit(10).forEach(x -&gt; System.out.print(x + &quot; &quot;));
 // 0 3 6 9 12 15 18 21 24 27</code></pre><h1 id="五-聚合操作"><a href="#五-聚合操作" class="headerlink" title="五. 聚合操作"></a>五. 聚合操作</h1><h2 id="（一）groupingBy"><a href="#（一）groupingBy" class="headerlink" title="（一）groupingBy"></a>（一）groupingBy</h2><p>&emsp;&emsp;groupingBy是多值的聚合操作，参数是Function </p>
 <h3 id="1-默认分组类型-List"><a href="#1-默认分组类型-List" class="headerlink" title="1.默认分组类型(List)"></a>1.默认分组类型(List)</h3><pre><code>Map&lt;String, List&lt;PersonVO&gt;&gt; teamMap = persons.stream()
         .collect(Collectors.groupingBy(PersonVO::getTeam));</code></pre><h3 id="2-指定分组类型"><a href="#2-指定分组类型" class="headerlink" title="2.指定分组类型"></a>2.指定分组类型</h3><pre><code>Map&lt;String, String&gt; teamString = persons.stream()
