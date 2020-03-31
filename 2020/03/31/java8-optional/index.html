@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>ICBC，再见！ | Ajay&#39;s Blog</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="ICBC，再见！ | Ajay&#39;s Blog">
+  <title>Java 8 进阶系列 - Optional类深度解析 | Ajay&#39;s Blog</title>
+  <meta name="keywords" content=" Java ">
+  <meta name="description" content="Java 8 进阶系列 - Optional类深度解析 | Ajay&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="IT科班出身，金融行业码农，由于工作之后技能点乱点，因而无稳定技术流派，已义无反顾投身开源世界 Java爱好者，近期又迷上了Python， 内心深处拒绝“成为码农”却又常常研究代码到深夜 讨厌无趣的人，更害怕自己变成一个那样的人。。 万幸已脱单。。难为妹子了orz So..Don’t Have to Try So Hard..Just relax , and share , and have FU">
 <meta property="og:type" content="website">
@@ -442,9 +442,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-reasons-for-quit" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-java8-optional" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">ICBC，再见！</h1>
+        <h1 class="article-title">Java 8 进阶系列 - Optional类深度解析</h1>
     
     <div class="article-meta">
         
@@ -452,20 +452,26 @@
         
         <span class="book">
             
-                <a  data-rel="生活">生活</a>
+                <a  data-rel="技术">技术</a>
             
         </span>
         
         
+        <span class="tag">
+            
+            <a class="color5">Java</a>
+            
+        </span>
+        
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2016-04-24 00:10:00'>2016-04-24 00:10</time>
+        创建时间:<time class="date" title='更新时间: 2020-03-31 11:05:47'>2020-03-31 11:05</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:128</span>
+        <span>字数:1.7k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -484,7 +490,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一-前言"><span class="toc-text">一. 前言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#（一）概述"><span class="toc-text">（一）概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（二）方法及示例"><span class="toc-text">（二）方法及示例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-of"><span class="toc-text">1. of</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-ofNullable"><span class="toc-text">2. ofNullable</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-isPresent"><span class="toc-text">3. isPresent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-get"><span class="toc-text">4. get</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-ifPresent"><span class="toc-text">5. ifPresent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-orElse"><span class="toc-text">6. orElse</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-orElseGet"><span class="toc-text">7. orElseGet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-orElseThrow"><span class="toc-text">8. orElseThrow</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-map"><span class="toc-text">9. map</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-flatMap"><span class="toc-text">10. flatMap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-filter"><span class="toc-text">11. filter</span></a></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -500,16 +506,105 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>再闪亮的螺丝钉，<br>终究是螺丝钉。</p>
-<a id="more"></a>
-<p>熬是大多数人的宿命，<br>默默忍受着大企业病。</p>
-<p>或许能守得云开雾散，<br>毕竟也抛洒了汗水积累了人脉。</p>
-<p>此处也有荣誉与褒奖，<br>大多是给予“杂事王”们的补偿。</p>
-<p>哪里都有崇高的价值观，<br>这里还需要多少人拿青春埋单。</p>
-<p>最终我抬起头迈出这一步，<br>难免一丝遗憾，<br>却收获久违的释然！</p>
-<p>so，一图以蔽之。</p>
-<p><img src="/images/posts/reasons-for-quit/why_will_change_jobs.jpg" alt=""></p>
+        <p><div class='inner-toc'><h2>目录</h2><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一-前言"><span class="toc-text">一. 前言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#（一）概述"><span class="toc-text">（一）概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（二）方法及示例"><span class="toc-text">（二）方法及示例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-of"><span class="toc-text">1. of</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-ofNullable"><span class="toc-text">2. ofNullable</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-isPresent"><span class="toc-text">3. isPresent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-get"><span class="toc-text">4. get</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-ifPresent"><span class="toc-text">5. ifPresent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-orElse"><span class="toc-text">6. orElse</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-orElseGet"><span class="toc-text">7. orElseGet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-orElseThrow"><span class="toc-text">8. orElseThrow</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-map"><span class="toc-text">9. map</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-flatMap"><span class="toc-text">10. flatMap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-filter"><span class="toc-text">11. filter</span></a></li></ol></li></ol></li></ol></div></p>
+<h1 id="一-前言"><a href="#一-前言" class="headerlink" title="一. 前言"></a>一. 前言</h1><h2 id="（一）概述"><a href="#（一）概述" class="headerlink" title="（一）概述"></a>（一）概述</h2><p>&emsp;&emsp;在Java8之前，null值的判断一直是困扰Java程序员的问题，大家可能都有这样的经历：调用一个方法得到了返回值却不能直接将返回值作为参数去调用别的方法。我们首先要判断这个返回值是否为null，只有在非空的前提下才能将其作为其他方法的参数。为了防止NullPointException的出现，我们不得不编写大量的防御性代码，如下例所示：</p>
+<pre><code>Passenger passenger = SomeMehtod.getPassenger();
+if(passenger != null &amp;&amp; passenger.getCert() != null 
+   &amp;&amp; passenger.getCert().getPersonalInfo != null){   
+    return passenger.getCert().getPersonalInfo().getName();
+}
+else return &quot;default name&quot;;</code></pre><p>&emsp;&emsp;对于嵌套比较深的类，上述代码太常见了，大段的&amp;&amp;条件判断非常容易出错，同时代码可读性也非常差。</p>
+<p>&emsp;&emsp;Java 8引入了新的Optional类，专门用来解决null值问题，对于嵌套类的空判断，使用Optional比传统的层层剥皮判断要更加优雅，代码量也会少很多。然而需要特别说明的是，目前Optional的最优场景还是建议配合Stream API使用。如果不结合Stream API来看，虽然也能改造相当一部分if else冗余嵌套的场景，但Optional也可能会让代码变得更冗余，过犹不及，需要结合具体场景具体分析。</p>
+<p>&emsp;&emsp;本文会逐个探讨Optional类包含的方法，并通过一两个示例展示如何使用。</p>
+<h2 id="（二）方法及示例"><a href="#（二）方法及示例" class="headerlink" title="（二）方法及示例"></a>（二）方法及示例</h2><h3 id="1-of"><a href="#1-of" class="headerlink" title="1. of"></a>1. of</h3><blockquote>
+<p>为非null的值创建一个Optional。</p>
+</blockquote>
+<p>&emsp;&emsp; of方法通过工厂方法创建Optional类。需要注意的是，创建对象时传入的参数不能为null。如果传入参数为null，则抛出NullPointerException。</p>
+<pre><code>//调用工厂方法创建Optional实例
+Optional&lt;String&gt; name = Optional.of(&quot;Sanaulla&quot;);
+//传入参数为null，抛出NullPointerException.
+Optional&lt;String&gt; someNull = Optional.of(null);</code></pre><h3 id="2-ofNullable"><a href="#2-ofNullable" class="headerlink" title="2. ofNullable"></a>2. ofNullable</h3><blockquote>
+<p>为指定的值创建一个Optional，如果指定的值为null，则返回一个空的Optional。</p>
+</blockquote>
+<p>&emsp;&emsp;ofNullable与of方法相似，唯一的区别是可以接受参数为null的情况。示例如下：</p>
+<pre><code>//下面创建了一个不包含任何值的Optional实例
+//例如，值为&#39;null&#39;
+Optional empty = Optional.ofNullable(null);</code></pre><h3 id="3-isPresent"><a href="#3-isPresent" class="headerlink" title="3. isPresent"></a>3. isPresent</h3><blockquote>
+<p>非常容易理解，如果值存在返回true，否则返回false。</p>
+</blockquote>
+<pre><code>//isPresent方法用来检查Optional实例中是否包含值
+if (name.isPresent()) {
+  //在Optional实例内调用get()返回已存在的值
+  System.out.println(name.get());//输出Sanaulla
+}</code></pre><h3 id="4-get"><a href="#4-get" class="headerlink" title="4. get"></a>4. get</h3><blockquote>
+<p>如果Optional有值则将其返回，否则抛出NoSuchElementException。</p>
+</blockquote>
+<p>&emsp;&emsp;上面的示例中，get方法用来得到Optional实例中的值。下面我们看一个抛出NoSuchElementException的例子：</p>
+<pre><code>//执行下面的代码会输出：No value present 
+try {
+  //在空的Optional实例上调用get()，抛出NoSuchElementException
+  System.out.println(empty.get());
+} catch (NoSuchElementException ex) {
+  System.out.println(ex.getMessage());
+}</code></pre><h3 id="5-ifPresent"><a href="#5-ifPresent" class="headerlink" title="5. ifPresent"></a>5. ifPresent</h3><blockquote>
+<p>如果Optional实例有值则为其调用consumer，否则不做处理。</p>
+</blockquote>
+<p>&emsp;&emsp;要理解ifPresent方法，首先需要了解Consumer类。简答地说，Consumer类包含一个抽象方法。该抽象方法对传入的值进行处理，但没有返回值。Java8支持不用接口直接通过lambda表达式传入参数。<br>&emsp;&emsp;如果Optional实例有值，调用ifPresent()可以接受接口段或lambda表达式。类似下面的代码：</p>
+<pre><code>//ifPresent方法接受lambda表达式作为参数。
+//lambda表达式对Optional的值调用consumer进行处理。
+name.ifPresent((value) -&gt; {
+  System.out.println(&quot;The length of the value is: &quot; + value.length());
+});</code></pre><h3 id="6-orElse"><a href="#6-orElse" class="headerlink" title="6. orElse"></a>6. orElse</h3><blockquote>
+<p>如果有值则将其返回，否则返回指定的其它值。</p>
+</blockquote>
+<p>&emsp;&emsp;如果Optional实例有值则将其返回，否则返回orElse方法传入的参数。示例如下：</p>
+<pre><code>//如果值不为null，orElse方法返回Optional实例的值。 如果为null，返回传入的消息。
+System.out.println(empty.orElse(&quot;There is no value present!&quot;));
+//输出：There is no value present!
+System.out.println(name.orElse(&quot;There is some value!&quot;));
+//输出：Sanaulla</code></pre><h3 id="7-orElseGet"><a href="#7-orElseGet" class="headerlink" title="7. orElseGet"></a>7. orElseGet</h3><blockquote>
+<p>如果有值则将其返回，否则返回指定的其它值。</p>
+</blockquote>
+<p>&emsp;&emsp;orElseGet与orElse方法类似，区别在于得到的默认值。orElse方法将传入的字符串作为默认值，orElseGet方法可以接受Supplier接口的实现用来生成默认值。示例如下：</p>
+<pre><code>//orElseGet与orElse方法类似，区别在于orElse传入的是默认值，
+//orElseGet可以接受一个lambda表达式生成默认值。
+//输出：Default Value
+System.out.println(empty.orElseGet(() -&gt; &quot;Default Value&quot;));
+//输出：Sanaulla
+System.out.println(name.orElseGet(() -&gt; &quot;Default Value&quot;));</code></pre><h3 id="8-orElseThrow"><a href="#8-orElseThrow" class="headerlink" title="8. orElseThrow"></a>8. orElseThrow</h3><blockquote>
+<p>如果有值则将其返回，否则抛出supplier接口创建的异常。</p>
+</blockquote>
+<p>&emsp;&emsp;在orElseGet方法中，我们传入一个Supplier接口。然而，在orElseThrow中我们可以传入一个lambda表达式或方法，如果值不存在来抛出异常。示例如下：</p>
+<pre><code>try {
+  //orElseThrow与orElse方法类似。与返回默认值不同，
+  //orElseThrow会抛出lambda表达式或方法生成的异常 
 
+  empty.orElseThrow(ValueAbsentException::new);
+} catch (Throwable ex) {
+  //输出: No value present in the Optional instance
+  System.out.println(ex.getMessage());
+}</code></pre><h3 id="9-map"><a href="#9-map" class="headerlink" title="9. map"></a>9. map</h3><p>&emsp;&emsp;map方法用来对Optional实例的值执行一系列操作。通过一组实现了Function接口的lambda表达式传入操作。</p>
+<pre><code>//map方法执行传入的lambda表达式参数对Optional实例的值进行修改。
+//为lambda表达式的返回值创建新的Optional实例作为map方法的返回值。
+Optional&lt;String&gt; upperName = name.map((value) -&gt; value.toUpperCase());
+System.out.println(upperName.orElse(&quot;No value found&quot;));</code></pre><h3 id="10-flatMap"><a href="#10-flatMap" class="headerlink" title="10. flatMap"></a>10. flatMap</h3><p>&emsp;&emsp;flatMap方法与map方法类似，区别在于mapping函数的返回值不同。map方法的mapping函数返回值可以是任何类型T，而flatMap方法的mapping函数必须是Optional。</p>
+<pre><code>//map方法中的lambda表达式返回值可以是任意类型，在map函数返回之前会包装为Optional。 
+//但flatMap方法中的lambda表达式返回值必须是Optionl实例。 
+upperName = name.flatMap((value) -&gt; Optional.of(value.toUpperCase()));
+System.out.println(upperName.orElse(&quot;No value found&quot;));//输出SANAULLA</code></pre><h3 id="11-filter"><a href="#11-filter" class="headerlink" title="11. filter"></a>11. filter</h3><p>&emsp;&emsp;filter个方法通过传入限定条件对Optional实例的值进行过滤。</p>
+<blockquote>
+<p>如果有值并且满足断言条件返回包含该值的Optional，否则返回空Optional。</p>
+</blockquote>
+<pre><code>//filter方法检查给定的Option值是否满足某些条件。
+//如果满足则返回同一个Option实例，否则返回空Optional。
+Optional&lt;String&gt; longName = name.filter((value) -&gt; value.length() &gt; 6);
+System.out.println(longName.orElse(&quot;The name is less than 6 characters&quot;));//输出Sanaulla
+
+//另一个例子是Optional值不满足filter指定的条件。
+Optional&lt;String&gt; anotherName = Optional.of(&quot;Sana&quot;);
+Optional&lt;String&gt; shortName = anotherName.filter((value) -&gt; value.length() &gt; 6);
+//输出：name长度不足6字符
+System.out.println(shortName.orElse(&quot;The name is less than 6 characters&quot;));</code></pre>
       
        
     </div>
@@ -518,12 +613,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>ICBC，再见！</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">128</span></p>
+    <p><span class="copy-title">文章标题:</span>Java 8 进阶系列 - Optional类深度解析</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.7k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Hao Zhenjie">Hao Zhenjie</a></p>
-    <p><span class="copy-title">发布时间:</span>2016-04-24, 00:10:00</p>
-    <p><span class="copy-title">最后更新:</span>2016-04-24, 00:10:00</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2016/04/24/reasons-for-quit/" title="ICBC，再见！">http://ajayhao.github.io/2016/04/24/reasons-for-quit/</a>
+    <p><span class="copy-title">发布时间:</span>2020-03-31, 11:05:47</p>
+    <p><span class="copy-title">最后更新:</span>2020-03-31, 11:05:47</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/31/java8-optional/" title="Java 8 进阶系列 - Optional类深度解析">http://ajayhao.github.io/2020/03/31/java8-optional/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
