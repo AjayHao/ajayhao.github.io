@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Java多线程系列(一)-正确使用 Volatile 变量 | Ajay&#39;s Blog</title>
-  <meta name="keywords" content=" 多线程 ">
-  <meta name="description" content="Java多线程系列(一)-正确使用 Volatile 变量 | Ajay&#39;s Blog">
+  <title>不煽情 | Ajay&#39;s Blog</title>
+  <meta name="keywords" content="  ">
+  <meta name="description" content="不煽情 | Ajay&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="IT科班出身，金融行业码农，由于工作之后技能点乱点，因而无稳定技术流派，已义无反顾投身开源世界 Java爱好者，近期又迷上了Python， 内心深处拒绝“成为码农”却又常常研究代码到深夜 讨厌无趣的人，更害怕自己变成一个那样的人。。 万幸已脱单。。难为妹子了orz So..Don’t Have to Try So Hard..Just relax , and share , and have FU">
 <meta property="og:type" content="website">
@@ -454,9 +454,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-multithread-volatile" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="page-" class="article article-type-page" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Java多线程系列(一)-正确使用 Volatile 变量</h1>
+        <h1 class="article-title">不煽情</h1>
     
     <div class="article-meta">
         
@@ -464,26 +464,26 @@
         
         <span class="book">
             
-                <a  data-rel="技术">技术</a>
+                <a  data-rel=""></a>
             
         </span>
         
         
         <span class="tag">
             
-            <a class="color2">多线程</a>
+            <a class="color3"></a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2016-11-30 17:09:02'>2016-11-30 17:09</time>
+        创建时间:<time class="date" title='更新时间: 2021-01-03 21:10:31'>2021-01-03 21:10</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:3.7k</span>
+        <span>字数:1.8k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -502,7 +502,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Volatile-变量"><span class="toc-text">Volatile 变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#正确使用-volatile-变量的条件"><span class="toc-text">正确使用 volatile 变量的条件</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#案例A-非线程安全的数值范围类"><span class="toc-text">案例A. 非线程安全的数值范围类</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#性能考虑"><span class="toc-text">性能考虑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#正确使用-volatile-的模式"><span class="toc-text">正确使用 volatile 的模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#模式-1：状态标志"><span class="toc-text">模式 #1：状态标志</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#案例B-将-volatile-变量作为状态标志使用"><span class="toc-text">案例B. 将 volatile 变量作为状态标志使用</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#模式-2：一次性安全发布（one-time-safe-publication）"><span class="toc-text">模式 #2：一次性安全发布（one-time safe publication）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#案例C-将-volatile-变量用于一次性安全发布"><span class="toc-text">案例C. 将 volatile 变量用于一次性安全发布</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#模式-3：独立观察（independent-observation）"><span class="toc-text">模式 #3：独立观察（independent observation）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#案例D-将-volatile-变量用于多个独立观察结果的发布"><span class="toc-text">案例D. 将 volatile 变量用于多个独立观察结果的发布</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#模式-4：“volatile-bean”-模式"><span class="toc-text">模式 #4：“volatile bean” 模式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#案例E-遵守-volatile-bean-模式的-Person-对象"><span class="toc-text">案例E. 遵守 volatile bean 模式的 Person 对象</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#volatile-的高级模式"><span class="toc-text">volatile 的高级模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#模式-5：开销较低的读－写锁策略"><span class="toc-text">模式 #5：开销较低的读－写锁策略</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#案例F-结合使用-volatile-和-synchronized-实现-“开销较低的读－写锁”"><span class="toc-text">案例F. 结合使用 volatile 和 synchronized 实现 “开销较低的读－写锁”</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结束语"><span class="toc-text">结束语</span></a></li></ol>
+        
     
 <style>
     .left-col .switch-btn,
@@ -518,121 +518,24 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>摘选并翻译自<br>Oracle Java 语言架构师 Brian Goetz的专栏月刊：<a href="http://www.ibm.com/developerworks/cn/java/j-jtp/" target="_blank" rel="noopener">Java 理论与实践</a></p>
-<h3 id="Volatile-变量"><a href="#Volatile-变量" class="headerlink" title="Volatile 变量"></a>Volatile 变量</h3><p>Volatile 变量具有 synchronized 的可见性特性，但是不具备原子特性。即线程能够自动发现 volatile 变量的最新值。Volatile 变量可用于提供线程安全，但是只能应用于非常有限的一组用例：多个变量之间或者某个变量的当前值与修改后值之间没有约束。因此，单独使用 volatile 还不足以实现计数器、互斥锁或任何具有与多个变量相关的不变式（Invariants）的类（例如 “start &lt;=end”）。<br>出于简易性和代码的可读性上，使用 volatile 变量比使用锁更好些。此外，volatile 变量不会像锁那样造成线程阻塞，因此也很少造成可伸缩性问题。在某些情况下，如果读操作远远大于写操作，volatile 变量还可以提供优于锁的性能优势。</p>
-<a id="more"></a>
-
-<h3 id="正确使用-volatile-变量的条件"><a href="#正确使用-volatile-变量的条件" class="headerlink" title="正确使用 volatile 变量的条件"></a>正确使用 volatile 变量的条件</h3><p>能够使用 volatile 变量来替代锁的条件很有限。要使 volatile 变量提供理想的线程安全，必须同时满足下面两个条件：</p>
-<ol>
-<li>对变量的写操作不依赖于当前值。</li>
-<li>该变量没有包含在具有其他变量的不变式中。</li>
-</ol>
-<p>这些条件表明，可以被写入 volatile 变量的这些有效值独立于任何程序的状态，包括变量的当前状态。<br>第一个条件的限制使 volatile 变量不能用作线程安全计数器。虽然增量操作（x++）看上去类似一个单独操作，实际上它是一个由读取－修改－写入操作序列组成的组合操作，必须以原子方式执行，而 volatile 不能提供必须的原子特性。实现正确的操作需要使 x 的值在操作期间保持不变，而 volatile 变量无法实现这点。<br>大多数编程情形都会与这两个条件的其中之一冲突，使得 volatile 变量不能像 synchronized 那样普遍适用于实现线程安全。</p>
-<h5 id="案例A-非线程安全的数值范围类"><a href="#案例A-非线程安全的数值范围类" class="headerlink" title="案例A. 非线程安全的数值范围类"></a>案例A. 非线程安全的数值范围类</h5><pre><code>@NotThreadSafe 
-public class NumberRange {
-private volatile int lower, upper;
-
-    public int getLower() { return lower; }
-    public int getUpper() { return upper; }
-
-    public void setLower(int value) { 
-        if (value &gt; upper) 
-            throw new IllegalArgumentException(...);
-        lower = value;
-    }
-
-    public void setUpper(int value) { 
-        if (value &lt; lower) 
-            throw new IllegalArgumentException(...);
-        upper = value;
-    }
-}</code></pre><p>案例A 显示了一个非线程安全的数值范围类。 它包含了一个不变式 —— 下界总是小于或等于上界。<br>这种方式限制了范围的状态变量，因此将 lower 和 upper 字段定义为 volatile 类型不能够充分实现类的线程安全；从而仍然需要使用同步。否则，如果凑巧两个线程在同一时间使用不一致的值执行 setLower 和 setUpper 的话，则会使范围处于不一致的状态。<br>例如，如果初始状态是 (0, 5)，同一时间内，线程 A 调用 setLower(4) 并且线程 B 调用 setUpper(3)，那么两个线程都会通过用于保护不变式的检查，使得最后的范围值是 (4, 3) —— 一个无效值。至于针对范围的其他操作，我们需要使 setLower() 和 setUpper() 操作原子化 —— 而将字段定义为 volatile 类型是无法实现这一目的的。</p>
-<h3 id="性能考虑"><a href="#性能考虑" class="headerlink" title="性能考虑"></a>性能考虑</h3><p>使用 volatile 变量的主要原因是其简易性：在某些情形下，使用 volatile 变量要比使用相应的锁简单得多。 使用 volatile 变量次要原因是其性能：某些情况下，volatile 变量同步机制的性能要优于锁。<br>在目前大多数的处理器架构上，volatile 读操作开销非常低 —— 几乎和非 volatile 读操作一样。而 volatile 写操作的开销要比非 volatile 写操作多很多，因为要保证可见性需要实现内存界定（Memory Fence），即便如此，volatile 的总开销仍然要比锁获取低。<br>volatile 操作不会像锁一样造成阻塞，因此，在能够安全使用 volatile 的情况下，volatile 可以提供一些优于锁的可伸缩特性。如果读操作的次数要远远超过写操作，与锁相比，volatile 变量通常能够减少同步的性能开销。</p>
-<h3 id="正确使用-volatile-的模式"><a href="#正确使用-volatile-的模式" class="headerlink" title="正确使用 volatile 的模式"></a>正确使用 volatile 的模式</h3><p>很多并发性专家事实上往往引导用户远离 volatile 变量，因为使用它们要比使用锁更加容易出错。然而，如果谨慎地遵循一些良好定义的模式，就能够在很多场合内安全地使用 volatile 变量。要始终牢记使用 volatile 的限制 —— <strong>只有在状态真正独立于程序内其他内容时才能使用 volatile</strong> —— 这条规则能够避免将这些模式扩展到不安全的用例。</p>
-<h4 id="模式-1：状态标志"><a href="#模式-1：状态标志" class="headerlink" title="模式 #1：状态标志"></a>模式 #1：状态标志</h4><p>也许实现 volatile 变量的规范使用仅仅是使用一个布尔状态标志，用于指示发生了一个重要的一次性事件，例如完成初始化或请求停机。<br>很多应用程序包含了一种控制结构，形式为 “在还没有准备好停止程序时再执行一些工作”，如案例B 所示：</p>
-<h5 id="案例B-将-volatile-变量作为状态标志使用"><a href="#案例B-将-volatile-变量作为状态标志使用" class="headerlink" title="案例B. 将 volatile 变量作为状态标志使用"></a>案例B. 将 volatile 变量作为状态标志使用</h5><pre><code>volatile boolean shutdownRequested;
-
-...
-
-public void shutdown() { shutdownRequested = true; }
-
-public void doWork() { 
-    while (!shutdownRequested) { 
-        // do stuff
-    }
-}</code></pre><p>很可能会从循环外部（即在另一个线程中）调用 shutdown() 方法 ，因此需要执行某种同步来确保正确实现 shutdownRequested 变量的可见性。（可能会从 JMX 侦听程序、GUI 事件线程中的操作侦听程序、通过 RMI 、通过一个 Web 服务等调用）。然而，使用 synchronized 块编写循环要比使用 案例B 所示的 volatile 状态标志编写麻烦很多。由于 volatile 简化了编码，并且状态标志并不依赖于程序内任何其他状态，因此此处非常适合使用 volatile。<br>这种类型的状态标记的一个公共特性是：通常只有一种状态转换；shutdownRequested 标志从 false 转换为 true，然后程序停止。这种模式可以扩展到来回转换的状态标志（从 false 到 true，再转换到 false），但是只有在转换周期不被察觉的情况下才能扩展。此外，还需要某些原子状态转换机制，例如原子变量。</p>
-<h4 id="模式-2：一次性安全发布（one-time-safe-publication）"><a href="#模式-2：一次性安全发布（one-time-safe-publication）" class="headerlink" title="模式 #2：一次性安全发布（one-time safe publication）"></a>模式 #2：一次性安全发布（one-time safe publication）</h4><p>缺乏同步会导致无法实现可见性，这使得确定何时写入对象引用而不是原语值变得更加困难。在缺乏同步的情况下，可能会遇到某个对象引用的更新值（由另一个线程写入）和该对象状态的旧值同时存在。（这就是造成著名的双重检查锁定（double-checked-locking）问题的根源，其中对象引用在没有同步的情况下进行读操作，产生的问题是您可能会看到一个更新的引用，但是仍然会通过该引用看到不完全构造的对象）。<br>实现安全发布对象的一种技术就是将对象引用定义为 volatile 类型。案例C 展示了一个示例，其中后台线程在启动阶段从数据库加载一些数据。其他代码在能够利用这些数据时，在使用之前将检查这些数据是否曾经发布过。</p>
-<h5 id="案例C-将-volatile-变量用于一次性安全发布"><a href="#案例C-将-volatile-变量用于一次性安全发布" class="headerlink" title="案例C. 将 volatile 变量用于一次性安全发布"></a>案例C. 将 volatile 变量用于一次性安全发布</h5><pre><code>public class BackgroundFloobleLoader {
-    public volatile Flooble theFlooble;
-
-    public void initInBackground() {
-        // do lots of stuff
-        theFlooble = new Flooble();  // this is the only write to theFlooble
-    }
-}
-
-public class SomeOtherClass {
-    public void doWork() {
-        while (true) { 
-            // do some stuff...
-            // use the Flooble, but only if it is ready
-            if (floobleLoader.theFlooble != null) 
-                doSomething(floobleLoader.theFlooble);
-        }
-    }
-}</code></pre><p>如果 theFlooble 引用不是 volatile 类型，doWork() 中的代码在解除对 theFlooble 的引用时，将会得到一个不完全构造的 Flooble。<br>该模式的一个必要条件是：<strong>被发布的对象必须是线程安全的，或者是有效的不可变对象（有效不可变意味着对象的状态在发布之后永远不会被修改）</strong>。volatile 类型的引用可以确保对象的发布形式的可见性，但是如果对象的状态在发布后将发生更改，那么就需要额外的同步。</p>
-<h4 id="模式-3：独立观察（independent-observation）"><a href="#模式-3：独立观察（independent-observation）" class="headerlink" title="模式 #3：独立观察（independent observation）"></a>模式 #3：独立观察（independent observation）</h4><p>安全使用 volatile 的另一种简单模式是：定期 “发布” 观察结果供程序内部使用。例如，假设有一种环境传感器能够感觉环境温度。一个后台线程可能会每隔几秒读取一次该传感器，并更新包含当前文档的 volatile 变量。然后，其他线程可以读取这个变量，从而随时能够看到最新的温度值。<br>使用该模式的另一种应用程序就是收集程序的统计信息。案例D 展示了身份验证机制如何记忆最近一次登录的用户的名字。将反复使用 lastUser 引用来发布值，以供程序的其他部分使用。</p>
-<h5 id="案例D-将-volatile-变量用于多个独立观察结果的发布"><a href="#案例D-将-volatile-变量用于多个独立观察结果的发布" class="headerlink" title="案例D. 将 volatile 变量用于多个独立观察结果的发布"></a>案例D. 将 volatile 变量用于多个独立观察结果的发布</h5><pre><code>public class UserManager {
-    public volatile String lastUser;
-
-    public boolean authenticate(String user, String password) {
-        boolean valid = passwordIsValid(user, password);
-        if (valid) {
-            User u = new User();
-            activeUsers.add(u);
-            lastUser = user;
-        }
-        return valid;
-    }
-}</code></pre><p>该模式是前面模式的扩展；将某个值发布以在程序内的其他地方使用，但是与一次性事件的发布不同，这是一系列独立事件。这个模式要求被发布的值是有效不可变的 —— 即值的状态在发布后不会更改。使用该值的代码需要清楚该值可能随时发生变化。</p>
-<h4 id="模式-4：“volatile-bean”-模式"><a href="#模式-4：“volatile-bean”-模式" class="headerlink" title="模式 #4：“volatile bean” 模式"></a>模式 #4：“volatile bean” 模式</h4><p>volatile bean 模式的基本原理是：很多框架为易变数据的持有者（例如 HttpSession）提供了容器，但是放入这些容器中的对象必须是线程安全的。<br>在 volatile bean 模式中，JavaBean 的所有数据成员都是 volatile 类型的，并且 getter 和 setter 方法必须非常普通 —— 除了获取或设置相应的属性外，不能包含任何逻辑。此外，对于对象引用的数据成员，引用的对象必须是有效不可变的。（这将禁止具有数组值的属性，因为当数组引用被声明为 volatile 时，只有引用而不是数组本身具有 volatile 语义）。对于任何 volatile 变量，不变式或约束都不能包含 JavaBean 属性。<br>案例E 中的示例展示了遵守 volatile bean 模式的 JavaBean：</p>
-<h5 id="案例E-遵守-volatile-bean-模式的-Person-对象"><a href="#案例E-遵守-volatile-bean-模式的-Person-对象" class="headerlink" title="案例E. 遵守 volatile bean 模式的 Person 对象"></a>案例E. 遵守 volatile bean 模式的 Person 对象</h5><pre><code>@ThreadSafe
-public class Person {
-    private volatile String firstName;
-    private volatile String lastName;
-    private volatile int age;
-
-    public String getFirstName() { return firstName; }
-    public String getLastName() { return lastName; }
-    public int getAge() { return age; }
-
-    public void setFirstName(String firstName) { 
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) { 
-        this.lastName = lastName;
-    }
-
-    public void setAge(int age) { 
-        this.age = age;
-    }
-}</code></pre><h3 id="volatile-的高级模式"><a href="#volatile-的高级模式" class="headerlink" title="volatile 的高级模式"></a>volatile 的高级模式</h3><p>前面几节介绍的模式涵盖了大部分的基本用例，在这些模式中使用 volatile 非常有用并且简单。这一节将介绍一种更加高级的模式，在该模式中，volatile 将提供性能或可伸缩性优势。<br>volatile 应用的的高级模式非常脆弱。因此，必须对假设的条件仔细证明，并且这些模式被严格地封装了起来，任何微小的改动都需要精准拿捏！<br>高级模式的主要目标是提供更高的性能，因此开始应用高级模式之前，需要对这些模式进行权衡，放弃可读性或可维护性来换取可能的性能收益， 如果并不需要提升性能（或者不能够通过一个严格的测试程序证明需要它），那很可能得不偿失。</p>
-<h4 id="模式-5：开销较低的读－写锁策略"><a href="#模式-5：开销较低的读－写锁策略" class="headerlink" title="模式 #5：开销较低的读－写锁策略"></a>模式 #5：开销较低的读－写锁策略</h4><p>至此， volatile 的功能还不足以实现计数器。因为 ++x 实际上是三种操作（读、添加、存储）的简单组合，如果多个线程凑巧试图同时对 volatile 计数器执行增量操作，那么它的更新值有可能会丢失。<br>然而，如果读操作远远超过写操作，您可以结合使用内部锁和 volatile 变量来减少公共代码路径的开销。 案例F 中显示的线程安全的计数器使用 synchronized 确保增量操作是原子的，并使用 volatile 保证当前结果的可见性。如果更新不频繁的话，该方法可实现更好的性能，因为读路径的开销仅仅涉及 volatile 读操作，这通常要优于获取一个无竞争的锁的开销。</p>
-<h5 id="案例F-结合使用-volatile-和-synchronized-实现-“开销较低的读－写锁”"><a href="#案例F-结合使用-volatile-和-synchronized-实现-“开销较低的读－写锁”" class="headerlink" title="案例F. 结合使用 volatile 和 synchronized 实现 “开销较低的读－写锁”"></a>案例F. 结合使用 volatile 和 synchronized 实现 “开销较低的读－写锁”</h5><pre><code>@ThreadSafe
-public class CheesyCounter {
-    // Employs the cheap read-write lock trick
-    // All mutative operations MUST be done with the &#39;this&#39; lock held
-    @GuardedBy(&quot;this&quot;) 
-    private volatile int value;
-
-    public int getValue() { return value; }
-
-    public synchronized int increment() {
-        return value++;
-    }
-}</code></pre><p>之所以将这种技术称之为 “开销较低的读－写锁” 是因为使用了不同的同步机制进行读写操作。因为本例中的写操作违反了使用 volatile 的第一个条件，因此不能使用 volatile 安全地实现计数器 —— 必须使用锁。<br>在这种模式中， 可以在读操作中使用 volatile 确保当前值的可见性，因此可以使用锁进行所有变化的操作，使用 volatile 进行只读操作。其中，锁一次只允许一个线程访问值，volatile 允许多个线程执行读操作，因此当使用 volatile 保证读代码路径时，要比使用锁执行全部代码路径获得更高的共享度 —— 就像读－写操作一样。<br>然而，要随时牢记这种模式的弱点：如果超越了该模式的最基本应用，结合这两个竞争的同步机制将变得非常困难。</p>
-<h3 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h3><p>与锁相比，Volatile 变量是一种非常简单但同时又非常脆弱的同步机制，它在某些情况下将提供优于锁的性能和伸缩性。如果严格遵循 volatile 的使用条件 —— 即变量真正独立于其他变量和自己以前的值 —— 在某些情况下可以使用 volatile 代替 synchronized 来简化代码。然而，使用 volatile 的代码往往比使用锁的代码更加容易出错。本文介绍的模式涵盖了可以使用 volatile 代替 synchronized 的最常见的一些用例。遵循这些模式（注意使用时不要超过各自的限制）可以帮助您安全地实现大多数用例，使用 volatile 变量获得更佳性能。</p>
+        <p>这一篇内容留给你，标题留给我自己，免得写着写着老毛病又犯。</p>
+<p>你一定会有很多疑问吧，之前关系那么好了，怎么突然就翻车了。 哪会有那么多莫名其妙呢，很多事情藏在心里很久了。。</p>
+<p>生日能收到礼物，不贵却很”重”，花了心思的份量十足。 除了父母爱人之外，我何以受过这样的礼遇。后来发现，可以用很亲昵的称呼了，可以语音还可以视频了，觉得自己像多了个“亲人”，幸福感满满呀。。可现实呢，现实真是这样的么？</p>
+<p>尽管聊天窗口里无所忌口，摄像头的另一面笑的多么灿烂；现实生活里，我们就像陌生人，我们就是陌生人！</p>
+<p>回到现实，我甚至不明白是怎么走到今天的。 就我们组里名义上大家都是同事，可无论xt还是ll，你们在同一个业务系统的战壕里，实打实的战友，有建立深厚友谊的基础。 你和表哥和薛，哪怕只是某个简单业务模块的需求方和实现，也算工作交集，称得上同事。<br>我想了很久，哪怕任何工作细项上，不曾有合作，也没有任何事情我能效劳。。具体的工作是领导的安排，我没有选择权，无论是巧合还是剧本，事实层面我与产品组是零交集了，那我们关系为什么那么好？ 是不是发现这件事成了无本之木，凭空在微信世界里能亲密无间，现实之中就解释不过去了，平时点头之交都难。</p>
+<p>现实中扮陌生人，回到家微信又能聊到深夜。。久而久之我产生了一种无所适从，两个割裂的世界带来的，巨大的脱力感： 绿底黑字是一个世界，现实生活是另一个世界。 一个世界里每天都会有你的各种动态；另一个世界里，因为这样那样的原因，不敢留有你的任何痕迹。。这种矛盾产生的不适感越来越强烈，强烈到后来我甚至害怕你来微信，因为那段时间“微信”上的关系又特别好，我不知道我应该调节到哪个状态来回复，才更适配这个真实的世界。而且因为加班的关系，微信总是深夜来，躺在床上看着微信，常常陷入回与不回的两难，隔天到单位开pc版微信第一时间是找你的聊天窗口然后秒关，真的好尴尬。。</p>
+<pre><code>“你住的城市下雨了，很想问你有没有带伞。可是我忍住了，因为我怕你说没带，而我又无能为力”
+                                                -- 宫崎骏</code></pre><p>我究竟是谁，微信世界里你的zj哥哥，是蝙蝠侠一样的英雄吗？可现实里呢，我已经受够了这个虚拟世界对现实世界的“反噬”了，这种裂开的感觉，我想纠正过来，如果现实世界里没有办法很快改变，那就改变虚拟世界吧。。</p>
+<p>我之前说自己是工具人，你不认可。我相信你，并不想我成为一个聊天宝宝吧。。可回到现实，现实层面，我的存在不就是个单纯聊天工具嘛！我除了陪聊天功能，可还有其他的功能？ 我没办法帮你处理合同，帮你查问题，帮你提升见识、眼界、格局，提供任何生活必需品以外的任何有价值的资源。。聊天以外的具体工作和生活事项，一切都与我没有干系。。而且很多时候聊天本身，除了派遣了无聊寂寞，可还有哪些实质的帮助吗？ 靠几句无关痛痒的言语，可有让你的工作量变少，可有能让你怀上心心念念的宝宝，可有让你的生活品质有所提升？都没有，none at all。。自己都觉得这天聊得很可悲不是么。 </p>
+<p>聊天会产生依赖感的，改变习惯一定很痛苦，如果两个人都不坚定，那就败了。。之前败了多少次我也记不清了。可这次应该不一样，从你那天找ll吃饭的时候开始，我突然意识到。。在你的微信世界里，就聊天本身，你有更好的选择了。ll也很健谈，而且从性格的完整性上，他比我更合适做你心理上的那个“哥哥”，性格更稳重更阳光，工作上交集也更多，从现实基础的角度，他才是更适合你培养成长期的可持续交流、互助好朋友。起码有能力真正的帮你，减轻你的工作负担，让你的生活更轻松，对吧。</p>
+<p>我觉得自己还算外向的人，却不够阳光，不知道怎么形容这种性格。直到这次B站跨年演出中冯提莫唱了“外向型自闭症患者”，真的是完美贴合。。 这不就是我么，表面外向，内在却很封闭。。这种有缺陷的性格给周遭相处的人或多或少带来了负面的影响。这两年没让你少受苦，自己也很过意不去，就像你说的，表现的像PUA。 我不想PUA你啊，不想PUA任何人，这种事在我身上没有任何幸福感，只有痛苦。<br>可和你相处这件事情上，在现实和虚幻之间，我真的觉得一直在刻意的“两面派”，很累，太累了。。且就聊天工具的角度，我都很失败啊。。掩面摇头。。</p>
+<p>12月中旬有一阵子实在闷的心烦，我会听《金刚经》，王菲39分钟的版本，听多了就想明白了很多事情。</p>
+<pre><code>一切有为法，如梦幻泡影，如露亦如电，应作如是观。</code></pre><p><a href="https://imgchr.com/i/sCZXb6" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/03/sCZXb6.jpg" alt="sCZXb6.jpg"></a>                </p>
+<p>3周时间，足够养成一个新的习惯了。我也以为你已经习惯了，不曾想昨天突然的问我，还能好么？</p>
+<p>怎样算好，怎样算不好，回到这一年半载的任何一个时点，你可愿意？ 这一年半载的任何一个时点，结果都是一个不变的循环，不断的会在某一个节点地震一次，伤害你一次，然后带着伤痕，进入下一个循环。你想要这样？</p>
+<p>我想回到2年前，那时候和你虽然初识，没有那么多话聊，却也没有那么多复杂的关系和现实的负担，那时候的我们还可以约吃饭，约下班。在你眼里，我也还是个温暖和善的大哥哥。。可惜。。回不去了</p>
+<p>所以，如果你对于这个现实有更好的办法，请告诉我，该怎么做，能怎么做？<br>如果你也对目前的现实同样无可奈何，那至少，让我体面的从你的微信世界里消失，那些痛快的不痛快的事情，让时间刻成灰然后扬了吧，不要再给我任何伤害你的机会了。</p>
+<p>我想做个好人，就这么简单。</p>
 
       
        
